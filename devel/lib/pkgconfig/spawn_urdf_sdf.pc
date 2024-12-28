@@ -1,0 +1,8 @@
+prefix=/home/bryan/catkin_ws/devel
+
+Name: spawn_urdf_sdf
+Description: Description of spawn_urdf_sdf
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

@@ -1,0 +1,10 @@
+controller_list:
+- name: "/ur5/eff_joint_traj_controller"
+  action_ns: follow_joint_trajectory
+  type:
+  - shoulder_pan_joint
+  - shoulder_lift_joint
+  - elbox_joint
+  - wrist_1_joint
+  - wrist_2_joint
+  - wrist_3_joint

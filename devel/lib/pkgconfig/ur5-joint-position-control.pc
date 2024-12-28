@@ -1,0 +1,8 @@
+prefix=/home/bryan/catkin_ws/devel
+
+Name: ur5-joint-position-control
+Description: Description of ur5-joint-position-control
+Version: 0.0.1
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

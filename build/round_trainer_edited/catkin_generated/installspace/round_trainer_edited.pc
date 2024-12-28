@@ -1,0 +1,8 @@
+prefix=/home/bryan/catkin_ws/install
+
+Name: round_trainer_edited
+Description: Description of round_trainer_edited
+Version: 1.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 
