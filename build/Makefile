@@ -2560,6 +2560,19 @@ _run_tests_ur3e_moveit_config_roslaunch-check/fast:
 .PHONY : _run_tests_ur3e_moveit_config_roslaunch-check/fast
 
 #=============================================================================
+# Target rules for targets named tcp_position_controller
+
+# Build rule for target.
+tcp_position_controller: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 tcp_position_controller
+.PHONY : tcp_position_controller
+
+# fast build rule for target.
+tcp_position_controller/fast:
+	$(MAKE) -f ur5-tcp-position-control/CMakeFiles/tcp_position_controller.dir/build.make ur5-tcp-position-control/CMakeFiles/tcp_position_controller.dir/build
+.PHONY : tcp_position_controller/fast
+
+#=============================================================================
 # Target rules for targets named run_tests_ur5_moveit_config
 
 # Build rule for target.
@@ -5343,6 +5356,7 @@ help:
 	@echo "... run_tests_ur3e_moveit_config_roslaunch-check_tests_moveit_planning_execution.xml"
 	@echo "... run_tests_ur3e_moveit_config_roslaunch-check"
 	@echo "... _run_tests_ur3e_moveit_config_roslaunch-check"
+	@echo "... tcp_position_controller"
 	@echo "... run_tests_ur5_moveit_config"
 	@echo "... _run_tests_ur5_moveit_config"
 	@echo "... run_tests_ur5_moveit_config_roslaunch-check"

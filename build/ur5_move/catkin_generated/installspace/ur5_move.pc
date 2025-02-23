@@ -1,0 +1,8 @@
+prefix=/home/bryan/catkin_ws/install
+
+Name: ur5_move
+Description: Description of ur5_move
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

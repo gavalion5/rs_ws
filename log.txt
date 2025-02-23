@@ -1,0 +1,884 @@
+... logging to /home/bryan/.ros/log/b4c5d744-c4ea-11ef-8c5d-e90b56dcdc08/roslaunch-bryan-ROG-Strix-G531GD-G531GD-111787.log
+Checking log directory for disk usage. This may take a while.
+Press Ctrl-C to interrupt
+Done checking log file disk usage. Usage is <1GB.
+]2;/home/bryan/catkin_ws/src/ur5_moveit_v2_config/launch/demo_gazebo.launch
+[1mstarted roslaunch server http://bryan-ROG-Strix-G531GD-G531GD:42179/[0m
+
+SUMMARY
+========
+
+PARAMETERS
+ * /controller_list: [{'name': '/ur5/e...
+ * /gazebo/enable_ros_network: True
+ * /joint_state_controller/publish_rate: 50
+ * /joint_state_controller/type: joint_state_contr...
+ * /move_group/allow_trajectory_execution: True
+ * /move_group/capabilities: 
+ * /move_group/default_planning_pipeline: ompl
+ * /move_group/disable_capabilities: 
+ * /move_group/max_range: 5.0
+ * /move_group/monitor_dynamics: False
+ * /move_group/moveit_controller_manager: moveit_ros_contro...
+ * /move_group/moveit_manage_controllers: True
+ * /move_group/octomap_resolution: 0.025
+ * /move_group/planning_pipelines/chomp/collision_clearance: 0.2
+ * /move_group/planning_pipelines/chomp/collision_threshold: 0.07
+ * /move_group/planning_pipelines/chomp/enable_failure_recovery: False
+ * /move_group/planning_pipelines/chomp/jiggle_fraction: 0.05
+ * /move_group/planning_pipelines/chomp/joint_update_limit: 0.1
+ * /move_group/planning_pipelines/chomp/learning_rate: 0.01
+ * /move_group/planning_pipelines/chomp/max_iterations: 200
+ * /move_group/planning_pipelines/chomp/max_iterations_after_collision_free: 5
+ * /move_group/planning_pipelines/chomp/max_recovery_attempts: 5
+ * /move_group/planning_pipelines/chomp/obstacle_cost_weight: 1.0
+ * /move_group/planning_pipelines/chomp/planning_plugin: chomp_interface/C...
+ * /move_group/planning_pipelines/chomp/planning_time_limit: 10.0
+ * /move_group/planning_pipelines/chomp/pseudo_inverse_ridge_factor: 1e-4
+ * /move_group/planning_pipelines/chomp/request_adapters: default_planner_r...
+ * /move_group/planning_pipelines/chomp/ridge_factor: 0.0
+ * /move_group/planning_pipelines/chomp/smoothness_cost_acceleration: 1.0
+ * /move_group/planning_pipelines/chomp/smoothness_cost_jerk: 0.0
+ * /move_group/planning_pipelines/chomp/smoothness_cost_velocity: 0.0
+ * /move_group/planning_pipelines/chomp/smoothness_cost_weight: 0.1
+ * /move_group/planning_pipelines/chomp/start_state_max_bounds_error: 0.1
+ * /move_group/planning_pipelines/chomp/use_pseudo_inverse: False
+ * /move_group/planning_pipelines/chomp/use_stochastic_descent: True
+ * /move_group/planning_pipelines/ompl/jiggle_fraction: 0.05
+ * /move_group/planning_pipelines/ompl/manipulator/default_planner_config: RRT
+ * /move_group/planning_pipelines/ompl/manipulator/planner_configs: ['AnytimePathShor...
+ * /move_group/planning_pipelines/ompl/planner_configs/ABITstar/delay_rewiring_to_first_solution: 0
+ * /move_group/planning_pipelines/ompl/planner_configs/ABITstar/drop_unconnected_samples_on_prune: 0
+ * /move_group/planning_pipelines/ompl/planner_configs/ABITstar/find_approximate_solutions: 0
+ * /move_group/planning_pipelines/ompl/planner_configs/ABITstar/inflation_scaling_parameter: 10
+ * /move_group/planning_pipelines/ompl/planner_configs/ABITstar/initial_inflation_factor: 1000000
+ * /move_group/planning_pipelines/ompl/planner_configs/ABITstar/prune_threshold_as_fractional_cost_change: 0.1
+ * /move_group/planning_pipelines/ompl/planner_configs/ABITstar/rewire_factor: 1.001
+ * /move_group/planning_pipelines/ompl/planner_configs/ABITstar/samples_per_batch: 100
+ * /move_group/planning_pipelines/ompl/planner_configs/ABITstar/stop_on_each_solution_improvement: 0
+ * /move_group/planning_pipelines/ompl/planner_configs/ABITstar/truncation_scaling_parameter: 5.0
+ * /move_group/planning_pipelines/ompl/planner_configs/ABITstar/type: geometric::ABITstar
+ * /move_group/planning_pipelines/ompl/planner_configs/ABITstar/use_graph_pruning: 1
+ * /move_group/planning_pipelines/ompl/planner_configs/ABITstar/use_just_in_time_sampling: 0
+ * /move_group/planning_pipelines/ompl/planner_configs/ABITstar/use_k_nearest: 1
+ * /move_group/planning_pipelines/ompl/planner_configs/ABITstar/use_strict_queue_ordering: 0
+ * /move_group/planning_pipelines/ompl/planner_configs/AITstar/find_approximate_solutions: 0
+ * /move_group/planning_pipelines/ompl/planner_configs/AITstar/rewire_factor: 1.001
+ * /move_group/planning_pipelines/ompl/planner_configs/AITstar/samples_per_batch: 100
+ * /move_group/planning_pipelines/ompl/planner_configs/AITstar/set_max_num_goals: 1
+ * /move_group/planning_pipelines/ompl/planner_configs/AITstar/type: geometric::AITstar
+ * /move_group/planning_pipelines/ompl/planner_configs/AITstar/use_graph_pruning: 1
+ * /move_group/planning_pipelines/ompl/planner_configs/AITstar/use_k_nearest: 1
+ * /move_group/planning_pipelines/ompl/planner_configs/AnytimePathShortening/hybridize: True
+ * /move_group/planning_pipelines/ompl/planner_configs/AnytimePathShortening/max_hybrid_paths: 24
+ * /move_group/planning_pipelines/ompl/planner_configs/AnytimePathShortening/num_planners: 4
+ * /move_group/planning_pipelines/ompl/planner_configs/AnytimePathShortening/planners: 
+ * /move_group/planning_pipelines/ompl/planner_configs/AnytimePathShortening/shortcut: True
+ * /move_group/planning_pipelines/ompl/planner_configs/AnytimePathShortening/type: geometric::Anytim...
+ * /move_group/planning_pipelines/ompl/planner_configs/BFMT/balanced: 0
+ * /move_group/planning_pipelines/ompl/planner_configs/BFMT/cache_cc: 1
+ * /move_group/planning_pipelines/ompl/planner_configs/BFMT/extended_fmt: 1
+ * /move_group/planning_pipelines/ompl/planner_configs/BFMT/heuristics: 1
+ * /move_group/planning_pipelines/ompl/planner_configs/BFMT/nearest_k: 1
+ * /move_group/planning_pipelines/ompl/planner_configs/BFMT/num_samples: 1000
+ * /move_group/planning_pipelines/ompl/planner_configs/BFMT/optimality: 1
+ * /move_group/planning_pipelines/ompl/planner_configs/BFMT/radius_multiplier: 1.0
+ * /move_group/planning_pipelines/ompl/planner_configs/BFMT/type: geometric::BFMT
+ * /move_group/planning_pipelines/ompl/planner_configs/BITstar/delay_rewiring_to_first_solution: 0
+ * /move_group/planning_pipelines/ompl/planner_configs/BITstar/drop_unconnected_samples_on_prune: 0
+ * /move_group/planning_pipelines/ompl/planner_configs/BITstar/find_approximate_solutions: 0
+ * /move_group/planning_pipelines/ompl/planner_configs/BITstar/prune_threshold_as_fractional_cost_change: 0.1
+ * /move_group/planning_pipelines/ompl/planner_configs/BITstar/rewire_factor: 1.001
+ * /move_group/planning_pipelines/ompl/planner_configs/BITstar/samples_per_batch: 100
+ * /move_group/planning_pipelines/ompl/planner_configs/BITstar/stop_on_each_solution_improvement: 0
+ * /move_group/planning_pipelines/ompl/planner_configs/BITstar/type: geometric::BITstar
+ * /move_group/planning_pipelines/ompl/planner_configs/BITstar/use_graph_pruning: 1
+ * /move_group/planning_pipelines/ompl/planner_configs/BITstar/use_just_in_time_sampling: 0
+ * /move_group/planning_pipelines/ompl/planner_configs/BITstar/use_k_nearest: 1
+ * /move_group/planning_pipelines/ompl/planner_configs/BITstar/use_strict_queue_ordering: 0
+ * /move_group/planning_pipelines/ompl/planner_configs/BKPIECE/border_fraction: 0.9
+ * /move_group/planning_pipelines/ompl/planner_configs/BKPIECE/failed_expansion_score_factor: 0.5
+ * /move_group/planning_pipelines/ompl/planner_configs/BKPIECE/min_valid_path_fraction: 0.5
+ * /move_group/planning_pipelines/ompl/planner_configs/BKPIECE/range: 0.0
+ * /move_group/planning_pipelines/ompl/planner_configs/BKPIECE/type: geometric::BKPIECE
+ * /move_group/planning_pipelines/ompl/planner_configs/BiEST/range: 0.0
+ * /move_group/planning_pipelines/ompl/planner_configs/BiEST/type: geometric::BiEST
+ * /move_group/planning_pipelines/ompl/planner_configs/BiTRRT/cost_threshold: 1e300
+ * /move_group/planning_pipelines/ompl/planner_configs/BiTRRT/frontier_node_ratio: 0.1
+ * /move_group/planning_pipelines/ompl/planner_configs/BiTRRT/frontier_threshold: 0.0
+ * /move_group/planning_pipelines/ompl/planner_configs/BiTRRT/init_temperature: 100
+ * /move_group/planning_pipelines/ompl/planner_configs/BiTRRT/range: 0.0
+ * /move_group/planning_pipelines/ompl/planner_configs/BiTRRT/temp_change_factor: 0.1
+ * /move_group/planning_pipelines/ompl/planner_configs/BiTRRT/type: geometric::BiTRRT
+ * /move_group/planning_pipelines/ompl/planner_configs/EST/goal_bias: 0.05
+ * /move_group/planning_pipelines/ompl/planner_configs/EST/range: 0.0
+ * /move_group/planning_pipelines/ompl/planner_configs/EST/type: geometric::EST
+ * /move_group/planning_pipelines/ompl/planner_configs/FMT/cache_cc: 1
+ * /move_group/planning_pipelines/ompl/planner_configs/FMT/extended_fmt: 1
+ * /move_group/planning_pipelines/ompl/planner_configs/FMT/heuristics: 0
+ * /move_group/planning_pipelines/ompl/planner_configs/FMT/nearest_k: 1
+ * /move_group/planning_pipelines/ompl/planner_configs/FMT/num_samples: 1000
+ * /move_group/planning_pipelines/ompl/planner_configs/FMT/radius_multiplier: 1.1
+ * /move_group/planning_pipelines/ompl/planner_configs/FMT/type: geometric::FMT
+ * /move_group/planning_pipelines/ompl/planner_configs/KPIECE/border_fraction: 0.9
+ * /move_group/planning_pipelines/ompl/planner_configs/KPIECE/failed_expansion_score_factor: 0.5
+ * /move_group/planning_pipelines/ompl/planner_configs/KPIECE/goal_bias: 0.05
+ * /move_group/planning_pipelines/ompl/planner_configs/KPIECE/min_valid_path_fraction: 0.5
+ * /move_group/planning_pipelines/ompl/planner_configs/KPIECE/range: 0.0
+ * /move_group/planning_pipelines/ompl/planner_configs/KPIECE/type: geometric::KPIECE
+ * /move_group/planning_pipelines/ompl/planner_configs/LBKPIECE/border_fraction: 0.9
+ * /move_group/planning_pipelines/ompl/planner_configs/LBKPIECE/min_valid_path_fraction: 0.5
+ * /move_group/planning_pipelines/ompl/planner_configs/LBKPIECE/range: 0.0
+ * /move_group/planning_pipelines/ompl/planner_configs/LBKPIECE/type: geometric::LBKPIECE
+ * /move_group/planning_pipelines/ompl/planner_configs/LBTRRT/epsilon: 0.4
+ * /move_group/planning_pipelines/ompl/planner_configs/LBTRRT/goal_bias: 0.05
+ * /move_group/planning_pipelines/ompl/planner_configs/LBTRRT/range: 0.0
+ * /move_group/planning_pipelines/ompl/planner_configs/LBTRRT/type: geometric::LBTRRT
+ * /move_group/planning_pipelines/ompl/planner_configs/LazyPRM/range: 0.0
+ * /move_group/planning_pipelines/ompl/planner_configs/LazyPRM/type: geometric::LazyPRM
+ * /move_group/planning_pipelines/ompl/planner_configs/LazyPRMstar/type: geometric::LazyPR...
+ * /move_group/planning_pipelines/ompl/planner_configs/PDST/type: geometric::PDST
+ * /move_group/planning_pipelines/ompl/planner_configs/PRM/max_nearest_neighbors: 10
+ * /move_group/planning_pipelines/ompl/planner_configs/PRM/type: geometric::PRM
+ * /move_group/planning_pipelines/ompl/planner_configs/PRMstar/type: geometric::PRMstar
+ * /move_group/planning_pipelines/ompl/planner_configs/ProjEST/goal_bias: 0.05
+ * /move_group/planning_pipelines/ompl/planner_configs/ProjEST/range: 0.0
+ * /move_group/planning_pipelines/ompl/planner_configs/ProjEST/type: geometric::ProjEST
+ * /move_group/planning_pipelines/ompl/planner_configs/RRT/goal_bias: 0.05
+ * /move_group/planning_pipelines/ompl/planner_configs/RRT/range: 0.0
+ * /move_group/planning_pipelines/ompl/planner_configs/RRT/type: geometric::RRT
+ * /move_group/planning_pipelines/ompl/planner_configs/RRTConnect/range: 0.0
+ * /move_group/planning_pipelines/ompl/planner_configs/RRTConnect/type: geometric::RRTCon...
+ * /move_group/planning_pipelines/ompl/planner_configs/RRTstar/delay_collision_checking: 1
+ * /move_group/planning_pipelines/ompl/planner_configs/RRTstar/goal_bias: 0.05
+ * /move_group/planning_pipelines/ompl/planner_configs/RRTstar/range: 0.0
+ * /move_group/planning_pipelines/ompl/planner_configs/RRTstar/type: geometric::RRTstar
+ * /move_group/planning_pipelines/ompl/planner_configs/SBL/range: 0.0
+ * /move_group/planning_pipelines/ompl/planner_configs/SBL/type: geometric::SBL
+ * /move_group/planning_pipelines/ompl/planner_configs/SPARS/dense_delta_fraction: 0.001
+ * /move_group/planning_pipelines/ompl/planner_configs/SPARS/max_failures: 1000
+ * /move_group/planning_pipelines/ompl/planner_configs/SPARS/sparse_delta_fraction: 0.25
+ * /move_group/planning_pipelines/ompl/planner_configs/SPARS/stretch_factor: 3.0
+ * /move_group/planning_pipelines/ompl/planner_configs/SPARS/type: geometric::SPARS
+ * /move_group/planning_pipelines/ompl/planner_configs/SPARStwo/dense_delta_fraction: 0.001
+ * /move_group/planning_pipelines/ompl/planner_configs/SPARStwo/max_failures: 5000
+ * /move_group/planning_pipelines/ompl/planner_configs/SPARStwo/sparse_delta_fraction: 0.25
+ * /move_group/planning_pipelines/ompl/planner_configs/SPARStwo/stretch_factor: 3.0
+ * /move_group/planning_pipelines/ompl/planner_configs/SPARStwo/type: geometric::SPARStwo
+ * /move_group/planning_pipelines/ompl/planner_configs/STRIDE/degree: 16
+ * /move_group/planning_pipelines/ompl/planner_configs/STRIDE/estimated_dimension: 0.0
+ * /move_group/planning_pipelines/ompl/planner_configs/STRIDE/goal_bias: 0.05
+ * /move_group/planning_pipelines/ompl/planner_configs/STRIDE/max_degree: 18
+ * /move_group/planning_pipelines/ompl/planner_configs/STRIDE/max_pts_per_leaf: 6
+ * /move_group/planning_pipelines/ompl/planner_configs/STRIDE/min_degree: 12
+ * /move_group/planning_pipelines/ompl/planner_configs/STRIDE/min_valid_path_fraction: 0.2
+ * /move_group/planning_pipelines/ompl/planner_configs/STRIDE/range: 0.0
+ * /move_group/planning_pipelines/ompl/planner_configs/STRIDE/type: geometric::STRIDE
+ * /move_group/planning_pipelines/ompl/planner_configs/STRIDE/use_projected_distance: 0
+ * /move_group/planning_pipelines/ompl/planner_configs/TRRT/frontier_node_ratio: 0.1
+ * /move_group/planning_pipelines/ompl/planner_configs/TRRT/frontier_threshold: 0.0
+ * /move_group/planning_pipelines/ompl/planner_configs/TRRT/goal_bias: 0.05
+ * /move_group/planning_pipelines/ompl/planner_configs/TRRT/init_temperature: 10e-6
+ * /move_group/planning_pipelines/ompl/planner_configs/TRRT/k_constant: 0.0
+ * /move_group/planning_pipelines/ompl/planner_configs/TRRT/max_states_failed: 10
+ * /move_group/planning_pipelines/ompl/planner_configs/TRRT/min_temperature: 10e-10
+ * /move_group/planning_pipelines/ompl/planner_configs/TRRT/range: 0.0
+ * /move_group/planning_pipelines/ompl/planner_configs/TRRT/temp_change_factor: 2.0
+ * /move_group/planning_pipelines/ompl/planner_configs/TRRT/type: geometric::TRRT
+ * /move_group/planning_pipelines/ompl/planning_plugin: ompl_interface/OM...
+ * /move_group/planning_pipelines/ompl/request_adapters: default_planner_r...
+ * /move_group/planning_pipelines/ompl/start_state_max_bounds_error: 0.1
+ * /move_group/planning_pipelines/pilz_industrial_motion_planner/capabilities: pilz_industrial_m...
+ * /move_group/planning_pipelines/pilz_industrial_motion_planner/default_planner_config: PTP
+ * /move_group/planning_pipelines/pilz_industrial_motion_planner/planning_plugin: pilz_industrial_m...
+ * /move_group/planning_pipelines/pilz_industrial_motion_planner/request_adapters: 
+ * /move_group/planning_scene_monitor/publish_geometry_updates: True
+ * /move_group/planning_scene_monitor/publish_planning_scene: True
+ * /move_group/planning_scene_monitor/publish_state_updates: True
+ * /move_group/planning_scene_monitor/publish_transforms_updates: True
+ * /move_group/sense_for_plan/max_safe_path_cost: 1
+ * /move_group/sensors: []
+ * /move_group/trajectory_execution/allowed_execution_duration_scaling: 1.2
+ * /move_group/trajectory_execution/allowed_goal_duration_margin: 0.5
+ * /move_group/trajectory_execution/allowed_start_tolerance: 0.01
+ * /robot_description: <?xml version="1....
+ * /robot_description_kinematics/manipulator/goal_joint_tolerance: 0.0001
+ * /robot_description_kinematics/manipulator/goal_orientation_tolerance: 0.001
+ * /robot_description_kinematics/manipulator/goal_position_tolerance: 0.0001
+ * /robot_description_kinematics/manipulator/kinematics_solver: kdl_kinematics_pl...
+ * /robot_description_kinematics/manipulator/kinematics_solver_search_resolution: 0.005
+ * /robot_description_kinematics/manipulator/kinematics_solver_timeout: 0.005
+ * /robot_description_planning/cartesian_limits/max_rot_vel: 1.57
+ * /robot_description_planning/cartesian_limits/max_trans_acc: 2.25
+ * /robot_description_planning/cartesian_limits/max_trans_dec: -5
+ * /robot_description_planning/cartesian_limits/max_trans_vel: 1
+ * /robot_description_planning/default_acceleration_scaling_factor: 0.1
+ * /robot_description_planning/default_velocity_scaling_factor: 0.1
+ * /robot_description_planning/joint_limits/elbow_joint/has_acceleration_limits: False
+ * /robot_description_planning/joint_limits/elbow_joint/has_velocity_limits: True
+ * /robot_description_planning/joint_limits/elbow_joint/max_acceleration: 0
+ * /robot_description_planning/joint_limits/elbow_joint/max_velocity: 3.141592653589793
+ * /robot_description_planning/joint_limits/shoulder_lift_joint/has_acceleration_limits: False
+ * /robot_description_planning/joint_limits/shoulder_lift_joint/has_velocity_limits: True
+ * /robot_description_planning/joint_limits/shoulder_lift_joint/max_acceleration: 0
+ * /robot_description_planning/joint_limits/shoulder_lift_joint/max_velocity: 3.141592653589793
+ * /robot_description_planning/joint_limits/shoulder_pan_joint/has_acceleration_limits: False
+ * /robot_description_planning/joint_limits/shoulder_pan_joint/has_velocity_limits: True
+ * /robot_description_planning/joint_limits/shoulder_pan_joint/max_acceleration: 0
+ * /robot_description_planning/joint_limits/shoulder_pan_joint/max_velocity: 3.141592653589793
+ * /robot_description_planning/joint_limits/wrist_1_joint/has_acceleration_limits: False
+ * /robot_description_planning/joint_limits/wrist_1_joint/has_velocity_limits: True
+ * /robot_description_planning/joint_limits/wrist_1_joint/max_acceleration: 0
+ * /robot_description_planning/joint_limits/wrist_1_joint/max_velocity: 3.141592653589793
+ * /robot_description_planning/joint_limits/wrist_2_joint/has_acceleration_limits: False
+ * /robot_description_planning/joint_limits/wrist_2_joint/has_velocity_limits: True
+ * /robot_description_planning/joint_limits/wrist_2_joint/max_acceleration: 0
+ * /robot_description_planning/joint_limits/wrist_2_joint/max_velocity: 3.141592653589793
+ * /robot_description_planning/joint_limits/wrist_3_joint/has_acceleration_limits: False
+ * /robot_description_planning/joint_limits/wrist_3_joint/has_velocity_limits: True
+ * /robot_description_planning/joint_limits/wrist_3_joint/max_acceleration: 0
+ * /robot_description_planning/joint_limits/wrist_3_joint/max_velocity: 3.141592653589793
+ * /robot_description_semantic: <?xml version="1....
+ * /rosdistro: noetic
+ * /rosversion: 1.17.0
+ * /use_sim_time: True
+
+NODES
+  /
+    controller_spawner (controller_manager/spawner)
+    gazebo (gazebo_ros/gzserver)
+    gazebo_controller_spawner (controller_manager/spawner)
+    gazebo_gui (gazebo_ros/gzclient)
+    move_group (moveit_ros_move_group/move_group)
+    robot_state_publisher (robot_state_publisher/robot_state_publisher)
+    rviz_bryan_ROG_Strix_G531GD_G531GD_111787_2404944357669235068 (rviz/rviz)
+    spawn_gazebo_model (gazebo_ros/spawn_model)
+[33m[ WARN] [1735371561.864928382]: Shutdown request received.[0m
+[33m[ WARN] [1735371561.866789072]: Reason given for shutdown: [[/robot_state_publisher] Reason: new node registered with same name][0m
+[33m[ WARN] [1735371562.104388157]: Shutdown request received.[0m
+[33m[ WARN] [1735371562.105478700]: Reason given for shutdown: [[/robot_state_publisher] Reason: new node registered with same name][0m
+[33m[ WARN] [1735371562.122384980]: Shutdown request received.[0m
+[33m[ WARN] [1735371562.122438473]: Reason given for shutdown: [[/robot_state_publisher] Reason: new node registered with same name][0m
+[0m[ INFO] [1735371561.919009418]: Loading robot model 'ur5_robot'...[0m
+[0m[ INFO] [1735371561.919874901]: No root/virtual joint specified in SRDF. Assuming fixed joint[0m
+[0m[ INFO] [1735371562.131748196, 1752.924000000]: Publishing maintained planning scene on 'monitored_planning_scene'[0m
+[0m[ INFO] [1735371562.134504428, 1752.927000000]: Listening to 'joint_states' for joint states[0m
+[0m[ INFO] [1735371562.138354161, 1752.931000000]: Listening to '/attached_collision_object' for attached collision objects[0m
+[0m[ INFO] [1735371562.138387087, 1752.931000000]: Starting planning scene monitor[0m
+[0m[ INFO] [1735371562.140101972, 1752.932000000]: Listening to '/planning_scene'[0m
+[0m[ INFO] [1735371562.140135155, 1752.932000000]: Starting world geometry update monitor for collision objects, attached objects, octomap updates.[0m
+[0m[ INFO] [1735371562.141999022, 1752.934000000]: Listening to '/collision_object'[0m
+[0m[ INFO] [1735371562.144130198, 1752.936000000]: Listening to '/planning_scene_world' for planning scene world geometry[0m
+[0m[ INFO] [1735371562.147666141, 1752.940000000]: Loading planning pipeline 'chomp'[0m
+[0m[ INFO] [1735371562.164066039, 1752.953000000]: Using planning interface 'CHOMP'[0m
+[0m[ INFO] [1735371562.167811116, 1752.957000000]: Param 'default_workspace_bounds' was not set. Using default value: 10[0m
+[0m[ INFO] [1735371562.168183600, 1752.958000000]: Param 'start_state_max_bounds_error' was set to 0.1[0m
+[0m[ INFO] [1735371562.168469502, 1752.958000000]: Param 'start_state_max_dt' was not set. Using default value: 0.5[0m
+[0m[ INFO] [1735371562.168797172, 1752.958000000]: Param 'start_state_max_dt' was not set. Using default value: 0.5[0m
+[0m[ INFO] [1735371562.169104730, 1752.959000000]: Param 'jiggle_fraction' was set to 0.05[0m
+[0m[ INFO] [1735371562.169401099, 1752.959000000]: Param 'max_sampling_attempts' was not set. Using default value: 100[0m
+[0m[ INFO] [1735371562.169455350, 1752.959000000]: Using planning request adapter 'Limiting Max Cartesian Speed'[0m
+[0m[ INFO] [1735371562.169504647, 1752.959000000]: Using planning request adapter 'Add Time Parameterization'[0m
+[0m[ INFO] [1735371562.169525412, 1752.959000000]: Using planning request adapter 'Resolve constraint frames to robot links'[0m
+[0m[ INFO] [1735371562.169568272, 1752.959000000]: Using planning request adapter 'Fix Workspace Bounds'[0m
+[0m[ INFO] [1735371562.169602591, 1752.959000000]: Using planning request adapter 'Fix Start State Bounds'[0m
+[0m[ INFO] [1735371562.169648094, 1752.959000000]: Using planning request adapter 'Fix Start State In Collision'[0m
+[0m[ INFO] [1735371562.169669728, 1752.959000000]: Using planning request adapter 'Fix Start State Path Constraints'[0m
+[0m[ INFO] [1735371562.170616590, 1752.960000000]: Loading planning pipeline 'ompl'[0m
+[0m[ INFO] [1735371562.223826071, 1753.010000000]: Using planning interface 'OMPL'[0m
+[0m[ INFO] [1735371562.226553310, 1753.013000000]: Param 'default_workspace_bounds' was not set. Using default value: 10[0m
+[0m[ INFO] [1735371562.226963441, 1753.013000000]: Param 'start_state_max_bounds_error' was set to 0.1[0m
+[0m[ INFO] [1735371562.227842507, 1753.014000000]: Param 'start_state_max_dt' was not set. Using default value: 0.5[0m
+[0m[ INFO] [1735371562.228886982, 1753.015000000]: Param 'start_state_max_dt' was not set. Using default value: 0.5[0m
+[0m[ INFO] [1735371562.229379011, 1753.015000000]: Param 'jiggle_fraction' was set to 0.05[0m
+[0m[ INFO] [1735371562.229686583, 1753.015000000]: Param 'max_sampling_attempts' was not set. Using default value: 100[0m
+[0m[ INFO] [1735371562.229836977, 1753.016000000]: Using planning request adapter 'Limiting Max Cartesian Speed'[0m
+[0m[ INFO] [1735371562.230034127, 1753.016000000]: Using planning request adapter 'Add Time Parameterization'[0m
+[0m[ INFO] [1735371562.230055605, 1753.016000000]: Using planning request adapter 'Resolve constraint frames to robot links'[0m
+[0m[ INFO] [1735371562.230075193, 1753.016000000]: Using planning request adapter 'Fi[33m[ WARN] [1735371562.269139679, 1753.056000000]: Failed to read controllers from /controller_manager/list_controllers[0m
+x Workspace Bounds'[0m
+[0m[ INFO] [1735371562.230470860, 1753.016000000]: Using planning request adapter 'Fix Start State Bounds'[0m
+[0m[ INFO] [1735371562.230488939, 1753.016000000]: Using planning request adapter 'Fix Start State In Collision'[0m
+[0m[ INFO] [1735371562.230505305, 1753.016000000]: Using planning request adapter 'Fix Start State Path Constraints'[0m
+[0m[ INFO] [1735371562.230588587, 1753.016000000]: Loading planning pipeline 'pilz_industrial_motion_planner'[0m
+[0m[ INFO] [1735371562.234809239, 1753.021000000]: Reading limits from namespace /robot_description_planning[0m
+[0m[ INFO] [1735371562.257452384, 1753.044000000]: Available plugins: pilz_industrial_motion_planner::PlanningContextLoaderCIRC pilz_industrial_motion_planner::PlanningContextLoaderLIN pilz_industrial_motion_planner::PlanningContextLoaderPTP [0m
+[0m[ INFO] [1735371562.257506971, 1753.044000000]: About to load: pilz_industrial_motion_planner::PlanningContextLoaderCIRC[0m
+[0m[ INFO] [1735371562.260064210, 1753.046000000]: Registered Algorithm [CIRC][0m
+[0m[ INFO] [1735371562.260131056, 1753.046000000]: About to load: pilz_industrial_motion_planner::PlanningContextLoaderLIN[0m
+[0m[ INFO] [1735371562.262328183, 1753.049000000]: Registered Algorithm [LIN][0m
+[0m[ INFO] [1735371562.262396771, 1753.049000000]: About to load: pilz_industrial_motion_planner::PlanningContextLoaderPTP[0m
+[0m[ INFO] [1735371562.264569783, 1753.051000000]: Registered Algorithm [PTP][0m
+[0m[ INFO] [1735371562.264627612, 1753.051000000]: Using planning interface 'Pilz Industrial Motion Planner'[0m
+[0m[ INFO] [1735371562.268747602, 1753.055000000]: Started moveit_ros_control_interface::MoveItControllerManager for namespace /[0m
+[0m[ INFO] [1735371562.278060089, 1753.065000000]: Trajectory execution is managing controllers[0m
+[0m[ INFO] [1735371562.278094610, 1753.065000000]: MoveGroup debug mode is ON[0m
+[96mLoading 'move_group/ApplyPlanningSceneService'...
+[0m[96mLoading 'move_group/ClearOctomapService'...
+[0m[96mLoading 'move_group/MoveGroupCartesianPathService'...
+[0m[96mLoading 'move_group/MoveGroupExecuteTrajectoryAction'...
+[0m[96mLoading 'move_group/MoveGroupGetPlanningSceneService'...
+[0m[96mLoading 'move_group/MoveGroupKinematicsService'...
+[0m[96mLoading 'move_group/MoveGroupMoveAction'...
+[0m[96mLoading 'move_group/MoveGroupPickPlaceAction'...
+[0m[96mLoading 'move_group/MoveGroupPlanService'...
+[0m[96mLoading 'move_group/MoveGroupQueryPlannersService'...
+[0m[96mLoading 'move_group/MoveGroupStateValidationService'...
+[0m[96mLoading 'pilz_industrial_motion_planner/MoveGroupSequenceAction'...
+[0m[0m[ INFO] [1735371562.344912250, 1753.131000000]: initialize move group sequence action[0m
+[0m[ INFO] [1735371562.352034624, 1753.138000000]: Reading limits from namespace /robot_description_planning[0m
+[96mLoading 'pilz_industrial_motion_planner/MoveGroupSequenceService'...
+[0m[0m[ INFO] [1735371562.372927758, 1753.159000000]: Reading limits from namespace /robot_description_planning[0m
+[0m[ INFO] [1735371562.397652997, 1753.184000000]: 
+
+********************************************************
+* MoveGroup using: 
+*     - ApplyPlanningSceneService
+*     - ClearOctomapService
+*     - CartesianPathService
+*     - ExecuteTrajectoryAction
+*     - GetPlanningSceneService
+*     - KinematicsService
+*     - MoveAction
+*     - PickPlaceAction
+*     - MotionPlanService
+*     - QueryPlannersService
+*     - StateValidationService
+*     - SequenceAction
+*     - SequenceService
+********************************************************
+[0m
+[0m[ INFO] [1735371562.398235870, 1753.185000000]: MoveGroup context using planning plugin ompl_interface/OMPLPlanner[0m
+[0m[ INFO] [1735371562.398263044, 1753.185000000]: MoveGroup context initialization complete[0m
+[92m
+You can start planning now!
+
+[0m[ERROR] [1735371562.402020, 1753.189000]: Spawn service failed. Exiting.
+[INFO] [1735371562.385563, 1753.172000]: Loading model XML from ros parameter robot_description
+[INFO] [1735371562.393218, 1753.178000]: Waiting for service /gazebo/spawn_urdf_model
+[INFO] [1735371562.395570, 1753.182000]: Calling service /gazebo/spawn_urdf_model
+[INFO] [1735371562.401133, 1753.188000]: Spawn status: SpawnModel: Failure - entity already exists.
+[33m[ WARN] [1735371562.453357896, 1753.241000000]: Shutdown request received.[0m
+[33m[ WARN] [1735371562.454737450, 1753.242000000]: Reason given for shutdown: [[/robot_state_publisher] Reason: new node registered with same name][0m
+[33m[ WARN] [1735371562.771743788]: Shutdown request received.[0m
+[33m[ WARN] [1735371562.772969756]: Reason given for shutdown: [[/robot_state_publisher] Reason: new node registered with same name][0m
+[33m[ WARN] [1735371562.781798991]: Shutdown request received.[0m
+[33m[ WARN] [1735371562.781842070]: Reason given for shutdown: [[/robot_state_publisher] Reason: new node registered with same name][0m
+[33m[ WARN] [1735371562.987308931]: Shutdown request received.[0m
+[33m[ WARN] [1735371562.988054051]: Reason given for shutdown: [[/robot_state_publisher] Reason: new node registered with same name][0m
+[33m[ WARN] [1735371562.993701480]: Shutdown request received.[0m
+[33m[ WARN] [1735371562.993731575]: Reason given for shutdown: [[/robot_state_publisher] Reason: new node registered with same name][0m
+[33m[ WARN] [1735371563.196444273]: Shutdown request received.[0m
+[33m[ WARN] [1735371563.197768329]: Reason given for shutdown: [[/robot_state_publisher] Reason: new node registered with same name][0m
+[33m[ WARN] [1735371563.201553342]: Shutdown request received.[0m
+[33m[ WARN] [1735371563.201589513]: Reason given for shutdown: [[/robot_state_publisher] Reason: new node registered with same name][0m
+[33m[ WARN] [1735371563.404658685]: Shutdown request received.[0m
+[33m[ WARN] [1735371563.406323370]: Reason given for shutdown: [[/robot_state_publisher] Reason: new node registered with same name][0m
+[33m[ WARN] [1735371563.410180518]: Shutdown request received.[0m
+[33m[ WARN] [1735371563.410209009]: Reason given for shutdown: [[/robot_state_publisher] Reason: new node registered with same name][0m
+[33m[ WARN] [1735371563.614555839]: Shutdown request received.[0m
+[33m[ WARN] [1735371563.617280868]: Reason given for shutdown: [[/robot_state_publisher] Reason: new node registered with same name][0m
+[33m[ WARN] [1735371563.622474591]: Shutdown request received.[0m
+[33m[ WARN] [1735371563.622524937]: Reason given for shutdown: [[/robot_state_publisher] Reason: new node registered with same name][0m
+[33m[ WARN] [1735371563.825155950]: Shutdown request received.[0m
+[33m[ WARN] [1735371563.826558036]: Reason given for shutdown: [[/robot_state_publisher] Reason: new node registered with same name][0m
+[33m[ WARN] [1735371563.831037050]: Shutdown request received.[0m
+[33m[ WARN] [1735371563.831067474]: Reason given for shutdown: [[/robot_state_publisher] Reason: new node registered with same name][0m
+[33m[ WARN] [1735371564.138064270]: Shutdown request received.[0m
+[33m[ WARN] [1735371564.139661541]: Reason given for shutdown: [[/robot_state_publisher] Reason: new node registered with same name][0m
+[33m[ WARN] [1735371564.448366463]: Shutdown request received.[0m
+[33m[ WARN] [1735371564.449088091]: Reason given for shutdown: [[/robot_state_publisher] Reason: new node registered with same name][0m
+[33m[ WARN] [1735371564.768141852]: Shutdown request received.[0m
+[33m[ WARN] [1735371564.769113038]: Reason given for shutdown: [[/robot_state_publisher] Reason: new node registered with same name][0m
+[33m[ WARN] [1735371565.179333851]: Shutdown request received.[0m
+[33m[ WARN] [1735371565.181334494]: Reason given for shutdown: [[/robot_state_publisher] Reason: new node registered with same name][0m
+[33m[ WARN] [1735371565.185715204]: Shutdown request received.[0m
+[33m[ WARN] [1735371565.185743374]: Reason given for shutdown: [[/robot_state_publisher] Reason: new node registered with same name][0m
+[33m[ WARN] [1735371565.593314445]: Shutdown request received.[0m
+[33m[ WARN] [1735371565.594913555]: Reason given for shutdown: [[/robot_state_publisher] Reason: new node registered with same name][0m
+[33m[ WARN] [1735371565.600452198]: Shutdown request received.[0m
+[33m[ WARN] [1735371565.600473868]: Reason given for shutdown: [[/robot_state_publisher] Reason: new node registered with same name][0m
+[33m[ WARN] [1735371566.008999343]: Shutdown request received.[0m
+[33m[ WARN] [1735371566.011348165]: Reason given for shutdown: [[/robot_state_publisher] Reason: new node registered with same name][0m
+[33m[ WARN] [1735371566.014150669]: Shutdown request received.[0m
+[33m[ WARN] [1735371566.014183429]: Reason given for shutdown: [[/robot_state_publisher] Reason: new node registered with same name][0m
+[33m[ WARN] [1735371566.436509692, 1757.125000000]: Shutdown request received.[0m
+[33m[ WARN] [1735371566.443602831, 1757.131000000]: Reason given for shutdown: [[/robot_state_publisher] Reason: new node registered with same name][0m
+[33m[ WARN] [1735371566.655791286]: Shutdown request received.[0m
+[33m[ WARN] [1735371566.657108463]: Reason given for shutdown: [[/robot_state_publisher] Reason: new node registered with same name][0m
+[33m[ WARN] [1735371566.669297784]: Shutdown request received.[0m
+[33m[ WARN] [1735371566.669343635]: Reason given for shutdown: [[/robot_state_publisher] Reason: new node registered with same name][0m
+[33m[ WARN] [1735371566.875980127]: Shutdown request received.[0m
+[33m[ WARN] [1735371566.877060471]: Reason given for shutdown: [[/robot_state_publisher] Reason: new node registered with same name][0m
+[33m[ WARN] [1735371566.881590258]: Shutdown request received.[0m
+[33m[ WARN] [1735371566.881636498]: Reason given for shutdown: [[/robot_state_publisher] Reason: new node registered with same name][0m
+[33m[ WARN] [1735371567.409007393]: Shutdown request received.[0m
+[33m[ WARN] [1735371567.409809483]: Reason given for shutdown: [[/robot_state_publisher] Reason: new node registered with same name][0m
+[33m[ WARN] [1735371567.726652013]: Shutdown request received.[0m
+[33m[ WARN] [1735371567.727639647]: Reason given for shutdown: [[/robot_state_publisher] Reason: new node registered with same name][0m
+[33m[ WARN] [1735371568.143842474]: Shutdown request received.[0m
+[33m[ WARN] [1735371568.145278409]: Reason given for shutdown: [[/robot_state_publisher] Reason: new node registered with same name][0m
+[33m[ WARN] [1735371568.552483145]: Shutdown request received.[0m
+[33m[ WARN] [1735371568.554923481]: Reason given for shutdown: [[/robot_state_publisher] Reason: new node registered with same name][0m
+[33m[ WARN] [1735371568.866614612]: Shutdown request received.[0m
+[33m[ WARN] [1735371568.873515964]: Reason given for shutdown: [[/robot_state_publisher] Reason: new node registered with same name][0m
+[33m[ WARN] [1735371568.879596804]: Shutdown request received.[0m
+[33m[ WARN] [1735371568.879623340]: Reason given for shutdown: [[/robot_state_publisher] Reason: new node registered with same name][0m
+[33m[ WARN] [1735371569.093647513]: Shutdown request received.[0m
+[33m[ WARN] [1735371569.098022932]: Reason given for shutdown: [[/robot_state_publisher] Reason: new node registered with same name][0m
+[33m[ WARN] [1735371569.103574085]: Shutdown request received.[0m
+[33m[ WARN] [1735371569.103626798]: Reason given for shutdown: [[/robot_state_publisher] Reason: new node registered with same name][0m
+[33m[ WARN] [1735371569.510048127, 1760.050000000]: Shutdown request received.[0m
+[33m[ WARN] [1735371569.512740743, 1760.050000000]: Reason given for shutdown: [[/robot_state_publisher] Reason: new node registered with same name][0m
+[33m[ WARN] [1735371569.834008678]: Shutdown request received.[0m
+[33m[ WARN] [1735371569.836889760]: Reason given for shutdown: [[/robot_state_publisher] Reason: new node registered with same name][0m
+[33m[ WARN] [1735371570.152292699]: Shutdown request received.[0m
+[33m[ WARN] [1735371570.154270466]: Reason given for shutdown: [[/robot_state_publisher] Reason: new node registered with same name][0m
+[33m[ WARN] [1735371570.462321406]: Shutdown request received.[0m
+[33m[ WARN] [1735371570.463250119]: Reason given for shutdown: [[/robot_state_publisher] Reason: new node registered with same name][0m
+
+[1mROS_MASTER_URI=http://localhost:11311[0m
+]2;/home/bryan/catkin_ws/src/ur5_moveit_v2_config/launch/demo_gazebo.launch http://localhost:11311
+[1mprocess[gazebo-1]: started with pid [111828][0m
+[1mprocess[gazebo_gui-2]: started with pid [111832][0m
+[1mprocess[spawn_gazebo_model-3]: started with pid [111838][0m
+[1mprocess[controller_spawner-4]: started with pid [111839][0m
+[1mprocess[gazebo_controller_spawner-5]: started with pid [111840][0m
+[1mprocess[robot_state_publisher-6]: started with pid [111841][0m
+[1mprocess[move_group-7]: started with pid [111842][0m
+[1mprocess[rviz_bryan_ROG_Strix_G531GD_G531GD_111787_2404944357669235068-8]: started with pid [111843][0m
+[1m[robot_state_publisher-6] process has finished cleanly
+log file: /home/bryan/.ros/log/b4c5d744-c4ea-11ef-8c5d-e90b56dcdc08/robot_state_publisher-6*.log[0m
+[robot_state_publisher-6] restarting process
+[1mprocess[robot_state_publisher-6]: started with pid [111888][0m
+[1m[robot_state_publisher-6] process has finished cleanly
+log file: /home/bryan/.ros/log/b4c5d744-c4ea-11ef-8c5d-e90b56dcdc08/robot_state_publisher-6*.log[0m
+[robot_state_publisher-6] restarting process
+[1mprocess[robot_state_publisher-6]: started with pid [111984][0m
+[1m[robot_state_publisher-6] process has finished cleanly
+log file: /home/bryan/.ros/log/b4c5d744-c4ea-11ef-8c5d-e90b56dcdc08/robot_state_publisher-6*.log[0m
+[robot_state_publisher-6] restarting process
+[1mprocess[robot_state_publisher-6]: started with pid [112054][0m
+[1m[robot_state_publisher-6] process has finished cleanly
+log file: /home/bryan/.ros/log/b4c5d744-c4ea-11ef-8c5d-e90b56dcdc08/robot_state_publisher-6*.log[0m
+[robot_state_publisher-6] restarting process
+[1mprocess[robot_state_publisher-6]: started with pid [112102][0m
+[1m[robot_state_publisher-6] process has finished cleanly
+log file: /home/bryan/.ros/log/b4c5d744-c4ea-11ef-8c5d-e90b56dcdc08/robot_state_publisher-6*.log[0m
+[robot_state_publisher-6] restarting process
+[1mprocess[robot_state_publisher-6]: started with pid [112138][0m
+[1m[robot_state_publisher-6] process has finished cleanly
+log file: /home/bryan/.ros/log/b4c5d744-c4ea-11ef-8c5d-e90b56dcdc08/robot_state_publisher-6*.log[0m
+[robot_state_publisher-6] restarting process
+[1mprocess[robot_state_publisher-6]: started with pid [112170][0m
+[1m[robot_state_publisher-6] process has finished cleanly
+log file: /home/bryan/.ros/log/b4c5d744-c4ea-11ef-8c5d-e90b56dcdc08/robot_state_publisher-6*.log[0m
+[robot_state_publisher-6] restarting process
+[1mprocess[robot_state_publisher-6]: started with pid [112184][0m
+[1m[robot_state_publisher-6] process has finished cleanly
+log file: /home/bryan/.ros/log/b4c5d744-c4ea-11ef-8c5d-e90b56dcdc08/robot_state_publisher-6*.log[0m
+[robot_state_publisher-6] restarting process
+[1mprocess[robot_state_publisher-6]: started with pid [112199][0m
+[1m[robot_state_publisher-6] process has finished cleanly
+log file: /home/bryan/.ros/log/b4c5d744-c4ea-11ef-8c5d-e90b56dcdc08/robot_state_publisher-6*.log[0m
+[robot_state_publisher-6] restarting process
+[1mprocess[robot_state_publisher-6]: started with pid [112234][0m
+[1m[robot_state_publisher-6] process has finished cleanly
+log file: /home/bryan/.ros/log/b4c5d744-c4ea-11ef-8c5d-e90b56dcdc08/robot_state_publisher-6*.log[0m
+[robot_state_publisher-6] restarting process
+[1mprocess[robot_state_publisher-6]: started with pid [112254][0m
+[1m[robot_state_publisher-6] process has finished cleanly
+log file: /home/bryan/.ros/log/b4c5d744-c4ea-11ef-8c5d-e90b56dcdc08/robot_state_publisher-6*.log[0m
+[robot_state_publisher-6] restarting process
+[1mprocess[robot_state_publisher-6]: started with pid [112269][0m
+[1m[robot_state_publisher-6] process has finished cleanly
+log file: /home/bryan/.ros/log/b4c5d744-c4ea-11ef-8c5d-e90b56dcdc08/robot_state_publisher-6*.log[0m
+[robot_state_publisher-6] restarting process
+[1mprocess[robot_state_publisher-6]: started with pid [112278][0m
+[1m[robot_state_publisher-6] process has finished cleanly
+log file: /home/bryan/.ros/log/b4c5d744-c4ea-11ef-8c5d-e90b56dcdc08/robot_state_publisher-6*.log[0m
+[robot_state_publisher-6] restarting process
+[1mprocess[robot_state_publisher-6]: started with pid [112294][0m
+[1m[robot_state_publisher-6] process has finished cleanly
+log file: /home/bryan/.ros/log/b4c5d744-c4ea-11ef-8c5d-e90b56dcdc08/robot_state_publisher-6*.log[0m
+[robot_state_publisher-6] restarting process
+[1mprocess[robot_state_publisher-6]: started with pid [112322][0m
+[1m[robot_state_publisher-6] process has finished cleanly
+log file: /home/bryan/.ros/log/b4c5d744-c4ea-11ef-8c5d-e90b56dcdc08/robot_state_publisher-6*.log[0m
+[robot_state_publisher-6] restarting process
+[1mprocess[robot_state_publisher-6]: started with pid [112338][0m
+[1m[robot_state_publisher-6] process has finished cleanly
+log file: /home/bryan/.ros/log/b4c5d744-c4ea-11ef-8c5d-e90b56dcdc08/robot_state_publisher-6*.log[0m
+[robot_state_publisher-6] restarting process
+[1mprocess[robot_state_publisher-6]: started with pid [112354][0m
+[1m[robot_state_publisher-6] process has finished cleanly
+log file: /home/bryan/.ros/log/b4c5d744-c4ea-11ef-8c5d-e90b56dcdc08/robot_state_publisher-6*.log[0m
+[robot_state_publisher-6] restarting process
+[1mprocess[robot_state_publisher-6]: started with pid [112369][0m
+[1m[robot_state_publisher-6] process has finished cleanly
+log file: /home/bryan/.ros/log/b4c5d744-c4ea-11ef-8c5d-e90b56dcdc08/robot_state_publisher-6*.log[0m
+[robot_state_publisher-6] restarting process
+[1mprocess[robot_state_publisher-6]: started with pid [112391][0m
+[1m[robot_state_publisher-6] process has finished cleanly
+log file: /home/bryan/.ros/log/b4c5d744-c4ea-11ef-8c5d-e90b56dcdc08/robot_state_publisher-6*.log[0m
+[robot_state_publisher-6] restarting process
+[1mprocess[robot_state_publisher-6]: started with pid [112405][0m
+[1m[robot_state_publisher-6] process has finished cleanly
+log file: /home/bryan/.ros/log/b4c5d744-c4ea-11ef-8c5d-e90b56dcdc08/robot_state_publisher-6*.log[0m
+[robot_state_publisher-6] restarting process
+[1mprocess[robot_state_publisher-6]: started with pid [112434][0m
+[1m[robot_state_publisher-6] process has finished cleanly
+log file: /home/bryan/.ros/log/b4c5d744-c4ea-11ef-8c5d-e90b56dcdc08/robot_state_publisher-6*.log[0m
+[robot_state_publisher-6] restarting process
+[1mprocess[robot_state_publisher-6]: started with pid [112442][0m
+[1m[robot_state_publisher-6] process has finished cleanly
+log file: /home/bryan/.ros/log/b4c5d744-c4ea-11ef-8c5d-e90b56dcdc08/robot_state_publisher-6*.log[0m
+[robot_state_publisher-6] restarting process
+[1mprocess[robot_state_publisher-6]: started with pid [112457][0m
+[1m[robot_state_publisher-6] process has finished cleanly
+log file: /home/bryan/.ros/log/b4c5d744-c4ea-11ef-8c5d-e90b56dcdc08/robot_state_publisher-6*.log[0m
+[robot_state_publisher-6] restarting process
+[1mprocess[robot_state_publisher-6]: started with pid [112473][0m
+[1m[robot_state_publisher-6] process has finished cleanly
+log file: /home/bryan/.ros/log/b4c5d744-c4ea-11ef-8c5d-e90b56dcdc08/robot_state_publisher-6*.log[0m
+[robot_state_publisher-6] restarting process
+[1mprocess[robot_state_publisher-6]: started with pid [112490][0m
+[1m[robot_state_publisher-6] process has finished cleanly
+log file: /home/bryan/.ros/log/b4c5d744-c4ea-11ef-8c5d-e90b56dcdc08/robot_state_publisher-6*.log[0m
+[robot_state_publisher-6] restarting process
+[1mprocess[robot_state_publisher-6]: started with pid [112512][0m
+[1m[robot_state_publisher-6] process has finished cleanly
+log file: /home/bryan/.ros/log/b4c5d744-c4ea-11ef-8c5d-e90b56dcdc08/robot_state_publisher-6*.log[0m
+[robot_state_publisher-6] restarting process
+[1mprocess[robot_state_publisher-6]: started with pid [112541][0m
+[1m[robot_state_publisher-6] process has finished cleanly
+log file: /home/bryan/.ros/log/b4c5d744-c4ea-11ef-8c5d-e90b56dcdc08/robot_state_publisher-6*.log[0m
+[robot_state_publisher-6] restarting process
+[1mprocess[robot_state_publisher-6]: started with pid [112556][0m
+[33m[ WARN] [1735371570.779787317]: Shutdown request received.[0m
+[33m[ WARN] [1735371570.780887170]: Reason given for shutdown: [[/robot_state_publisher] Reason: new node registered with same name][0m
+[33m[ WARN] [1735371571.196936746]: Shutdown request received.[0m
+[33m[ WARN] [1735371571.197679339]: Reason given for shutdown: [[/robot_state_publisher] Reason: new node registered with same name][0m
+[33m[ WARN] [1735371571.516444640]: Shutdown request received.[0m
+[33m[ WARN] [1735371571.517320781]: Reason given for shutdown: [[/robot_state_publisher] Reason: new node registered with same name][0m
+[33m[ WARN] [1735371571.823393362]: Shutdown request received.[0m
+[33m[ WARN] [1735371571.824504621]: Reason given for shutdown: [[/robot_state_publisher] Reason: new node registered with same name][0m
+[33m[ WARN] [1735371571.833154172]: Shutdown request received.[0m
+[33m[ WARN] [1735371571.833217036]: Reason given for shutdown: [[/robot_state_publisher] Reason: new node registered with same name][0m
+[33m[ WARN] [1735371572.137606576]: Shutdown request received.[0m
+[33m[ WARN] [1735371572.139680270]: Reason given for shutdown: [[/robot_state_publisher] Reason: new node registered with same name][0m
+[33m[ WARN] [1735371572.142872841]: Shutdown request received.[0m
+[33m[ WARN] [1735371572.142921518]: Reason given for shutdown: [[/robot_state_publisher] Reason: new node registered with same name][0m
+[33m[ WARN] [1735371572.456587062]: Shutdown request received.[0m
+[33m[ WARN] [1735371572.459334034]: Reason given for shutdown: [[/robot_state_publisher] Reason: new node registered with same name][0m
+[33m[ WARN] [1735371572.462057616]: Shutdown request received.[0m
+[33m[ WARN] [1735371572.462097237]: Reason given for shutdown: [[/robot_state_publisher] Reason: new node registered with same name][0m
+[33m[ WARN] [1735371572.669589762]: Shutdown request received.[0m
+[33m[ WARN] [1735371572.670593560]: Reason given for shutdown: [[/robot_state_publisher] Reason: new node registered with same name][0m
+[33m[ WARN] [1735371572.676043269]: Shutdown request received.[0m
+[33m[ WARN] [1735371572.676083111]: Reason given for shutdown: [[/robot_state_publisher] Reason: new node registered with same name][0m
+[33m[ WARN] [1735371573.087559968]: Shutdown request received.[0m
+[33m[ WARN] [1735371573.088792741]: Reason given for shutdown: [[/robot_state_publisher] Reason: new node registered with same name][0m
+[33m[ WARN] [1735371573.393402635]: Shutdown request received.[0m
+[33m[ WARN] [1735371573.394835509]: Reason given for shutdown: [[/robot_state_publisher] Reason: new node registered with same name][0m
+[33m[ WARN] [1735371573.403957462]: Shutdown request received.[0m
+[33m[ WARN] [1735371573.403985312]: Reason given for shutdown: [[/robot_state_publisher] Reason: new node registered with same name][0m
+[33m[ WARN] [1735371573.613127234]: Shutdown request received.[0m
+[33m[ WARN] [1735371573.615301018]: Reason given for shutdown: [[/robot_state_publisher] Reason: new node registered with same name][0m
+[33m[ WARN] [1735371573.622453551]: Shutdown request received.[0m
+[33m[ WARN] [1735371573.622501470]: Reason given for shutdown: [[/robot_state_publisher] Reason: new node registered with same name][0m
+[33m[ WARN] [1735371574.032100048]: Shutdown request received.[0m
+[33m[ WARN] [1735371574.033053343]: Reason given for shutdown: [[/robot_state_publisher] Reason: new node registered with same name][0m
+[33m[ WARN] [1735371574.347218998]: Shutdown request received.[0m
+[33m[ WARN] [1735371574.348577500]: Reason given for shutdown: [[/robot_state_publisher] Reason: new node registered with same name][0m
+[33m[ WARN] [1735371574.752650543]: Shutdown request received.[0m
+[33m[ WARN] [1735371574.754196433]: Reason given for shutdown: [[/robot_state_publisher] Reason: new node registered with same name][0m
+[33m[ WARN] [1735371574.974594012]: Shutdown request received.[0m
+[33m[ WARN] [1735371574.977097643]: Reason given for shutdown: [[/robot_state_publisher] Reason: new node registered with same name][0m
+[33m[ WARN] [1735371575.028648518, 1765.291000000]: Failed to fetch current robot state.[0m
+[33m[ WARN] [1735371575.306163488]: Shutdown request received.[0m
+[33m[ WARN] [1735371575.307913199]: Reason given for shutdown: [[/robot_state_publisher] Reason: new node registered with same name][0m
+[33m[ WARN] [1735371575.615195288]: Shutdown request received.[0m
+[33m[ WARN] [1735371575.616764308]: Reason given for shutdown: [[/robot_state_publisher] Reason: new node registered with same name][0m
+[33m[ WARN] [1735371575.626885974]: Shutdown request received.[0m
+[33m[ WARN] [1735371575.626953502]: Reason given for shutdown: [[/robot_state_publisher] Reason: new node registered with same name][0m
+[33m[ WARN] [1735371575.935082841]: Shutdown request received.[0m
+[33m[ WARN] [1735371575.938124628]: Reason given for shutdown: [[/robot_state_publisher] Reason: new node registered with same name][0m
+[33m[ WARN] [1735371575.947477076]: Shutdown request received.[0m
+[33m[ WARN] [1735371575.947513746]: Reason given for shutdown: [[/robot_state_publisher] Reason: new node registered with same name][0m
+[33m[ WARN] [1735371576.254904194]: Shutdown request received.[0m
+[33m[ WARN] [1735371576.256405357]: Reason given for shutdown: [[/robot_state_publisher] Reason: new node registered with same name][0m
+[33m[ WARN] [1735371576.266478986]: Shutdown request received.[0m
+[33m[ WARN] [1735371576.266552255]: Reason given for shutdown: [[/robot_state_publisher] Reason: new node registered with same name][0m
+[33m[ WARN] [1735371576.674197012]: Shutdown request received.[0m
+[33m[ WARN] [1735371576.675218562]: Reason given for shutdown: [[/robot_state_publisher] Reason: new node registered with same name][0m
+[33m[ WARN] [1735371576.824793427, 1767.000000000]: Failed to read controllers from /controller_manager/list_controllers[0m
+[31m[ERROR] [1735371576.824969767, 1767.000000000]: Unable to identify any set of controllers that can actuate the specified joints: [ elbow_joint shoulder_lift_joint shoulder_pan_joint wrist_1_joint wrist_2_joint wrist_3_joint ][0m
+[31m[ERROR] [1735371576.825024141, 1767.000000000]: Known controllers and their joints:
+[0m
+[33m[ WARN] [1735371577.086107672]: Shutdown request received.[0m
+[33m[ WARN] [1735371577.087202784]: Reason given for shutdown: [[/robot_state_publisher] Reason: new node registered with same name][0m
+[33m[ WARN] [1735371577.600696228]: Shutdown request received.[0m
+[33m[ WARN] [1735371577.601872670]: Reason given for shutdown: [[/robot_state_publisher] Reason: new node registered with same name][0m
+[33m[ WARN] [1735371577.917152654]: Shutdown request received.[0m
+[33m[ WARN] [1735371577.917896798]: Reason given for shutdown: [[/robot_state_publisher] Reason: new node registered with same name][0m
+[33m[ WARN] [1735371578.234144709]: Shutdown request received.[0m
+[33m[ WARN] [1735371578.235138501]: Reason given for shutdown: [[/robot_state_publisher] Reason: new node registered with same name][0m
+[33m[ WARN] [1735371578.545038711]: Shutdown request received.[0m
+[33m[ WARN] [1735371578.546062701]: Reason given for shutdown: [[/robot_state_publisher] Reason: new node registered with same name][0m
+[33m[ WARN] [1735371578.951752223]: Shutdown request received.[0m
+[33m[ WARN] [1735371578.955320717]: Reason given for shutdown: [[/robot_state_publisher] Reason: new node registered with same name][0m
+[33m[ WARN] [1735371578.958603655]: Shutdown request received.[0m
+[33m[ WARN] [1735371578.958663664]: Reason given for shutdown: [[/robot_state_publisher] Reason: new node registered with same name][0m
+[33m[ WARN] [1735371579.265751003]: Shutdown request received.[0m
+[33m[ WARN] [1735371579.271420549]: Reason given for shutdown: [[/robot_state_publisher] Reason: new node registered with same name][0m
+[33m[ WARN] [1735371579.278501506]: Shutdown request received.[0m
+[33m[ WARN] [1735371579.278527716]: Reason given for shutdown: [[/robot_state_publisher] Reason: new node registered with same name][0m
+[33m[ WARN] [1735371579.584802024]: Shutdown request received.[0m
+[33m[ WARN] [1735371579.586538465]: Reason given for shutdown: [[/robot_state_publisher] Reason: new node registered with same name][0m
+[33m[ WARN] [1735371579.591464640]: Shutdown request received.[0m
+[33m[ WARN] [1735371579.591549554]: Reason given for shutdown: [[/robot_state_publisher] Reason: new node registered with same name][0m
+[33m[ WARN] [1735371580.000173430]: Shutdown request received.[0m
+[33m[ WARN] [1735371580.001777422]: Reason given for shutdown: [[/robot_state_publisher] Reason: new node registered with same name][0m
+[33m[ WARN] [1735371580.425235807, 1770.437000000]: Shutdown request received.[0m
+[33m[ WARN] [1735371580.430208182, 1770.445000000]: Reason given for shutdown: [[/robot_state_publisher] Reason: new node registered with same name][0m
+[33m[ WARN] [1735371580.751037958]: Shutdown request received.[0m
+[33m[ WARN] [1735371580.752034134]: Reason given for shutdown: [[/robot_state_publisher] Reason: new node registered with same name][0m
+[1m[robot_state_publisher-6] process has finished cleanly
+log file: /home/bryan/.ros/log/b4c5d744-c4ea-11ef-8c5d-e90b56dcdc08/robot_state_publisher-6*.log[0m
+[robot_state_publisher-6] restarting process
+[1mprocess[robot_state_publisher-6]: started with pid [112571][0m
+[1m[robot_state_publisher-6] process has finished cleanly
+log file: /home/bryan/.ros/log/b4c5d744-c4ea-11ef-8c5d-e90b56dcdc08/robot_state_publisher-6*.log[0m
+[robot_state_publisher-6] restarting process
+[1mprocess[robot_state_publisher-6]: started with pid [112586][0m
+[1m[robot_state_publisher-6] process has finished cleanly
+log file: /home/bryan/.ros/log/b4c5d744-c4ea-11ef-8c5d-e90b56dcdc08/robot_state_publisher-6*.log[0m
+[robot_state_publisher-6] restarting process
+[1mprocess[robot_state_publisher-6]: started with pid [112602][0m
+[1m[robot_state_publisher-6] process has finished cleanly
+log file: /home/bryan/.ros/log/b4c5d744-c4ea-11ef-8c5d-e90b56dcdc08/robot_state_publisher-6*.log[0m
+[robot_state_publisher-6] restarting process
+[1mprocess[robot_state_publisher-6]: started with pid [112611][0m
+[1m[robot_state_publisher-6] process has finished cleanly
+log file: /home/bryan/.ros/log/b4c5d744-c4ea-11ef-8c5d-e90b56dcdc08/robot_state_publisher-6*.log[0m
+[robot_state_publisher-6] restarting process
+[1mprocess[robot_state_publisher-6]: started with pid [112639][0m
+[1m[robot_state_publisher-6] process has finished cleanly
+log file: /home/bryan/.ros/log/b4c5d744-c4ea-11ef-8c5d-e90b56dcdc08/robot_state_publisher-6*.log[0m
+[robot_state_publisher-6] restarting process
+[1mprocess[robot_state_publisher-6]: started with pid [112654][0m
+[1m[robot_state_publisher-6] process has finished cleanly
+log file: /home/bryan/.ros/log/b4c5d744-c4ea-11ef-8c5d-e90b56dcdc08/robot_state_publisher-6*.log[0m
+[robot_state_publisher-6] restarting process
+[1mprocess[robot_state_publisher-6]: started with pid [112671][0m
+[1m[robot_state_publisher-6] process has finished cleanly
+log file: /home/bryan/.ros/log/b4c5d744-c4ea-11ef-8c5d-e90b56dcdc08/robot_state_publisher-6*.log[0m
+[robot_state_publisher-6] restarting process
+[1mprocess[robot_state_publisher-6]: started with pid [112694][0m
+[1m[robot_state_publisher-6] process has finished cleanly
+log file: /home/bryan/.ros/log/b4c5d744-c4ea-11ef-8c5d-e90b56dcdc08/robot_state_publisher-6*.log[0m
+[robot_state_publisher-6] restarting process
+[1mprocess[robot_state_publisher-6]: started with pid [112701][0m
+[1m[robot_state_publisher-6] process has finished cleanly
+log file: /home/bryan/.ros/log/b4c5d744-c4ea-11ef-8c5d-e90b56dcdc08/robot_state_publisher-6*.log[0m
+[robot_state_publisher-6] restarting process
+[1mprocess[robot_state_publisher-6]: started with pid [112717][0m
+[1m[robot_state_publisher-6] process has finished cleanly
+log file: /home/bryan/.ros/log/b4c5d744-c4ea-11ef-8c5d-e90b56dcdc08/robot_state_publisher-6*.log[0m
+[robot_state_publisher-6] restarting process
+[1mprocess[robot_state_publisher-6]: started with pid [112752][0m
+[1m[robot_state_publisher-6] process has finished cleanly
+log file: /home/bryan/.ros/log/b4c5d744-c4ea-11ef-8c5d-e90b56dcdc08/robot_state_publisher-6*.log[0m
+[robot_state_publisher-6] restarting process
+[1mprocess[robot_state_publisher-6]: started with pid [112767][0m
+[1m[robot_state_publisher-6] process has finished cleanly
+log file: /home/bryan/.ros/log/b4c5d744-c4ea-11ef-8c5d-e90b56dcdc08/robot_state_publisher-6*.log[0m
+[robot_state_publisher-6] restarting process
+[1mprocess[robot_state_publisher-6]: started with pid [112774][0m
+[1m[robot_state_publisher-6] process has finished cleanly
+log file: /home/bryan/.ros/log/b4c5d744-c4ea-11ef-8c5d-e90b56dcdc08/robot_state_publisher-6*.log[0m
+[robot_state_publisher-6] restarting process
+[1mprocess[robot_state_publisher-6]: started with pid [112797][0m
+[1m[robot_state_publisher-6] process has finished cleanly
+log file: /home/bryan/.ros/log/b4c5d744-c4ea-11ef-8c5d-e90b56dcdc08/robot_state_publisher-6*.log[0m
+[robot_state_publisher-6] restarting process
+[1mprocess[robot_state_publisher-6]: started with pid [112818][0m
+[1m[robot_state_publisher-6] process has finished cleanly
+log file: /home/bryan/.ros/log/b4c5d744-c4ea-11ef-8c5d-e90b56dcdc08/robot_state_publisher-6*.log[0m
+[robot_state_publisher-6] restarting process
+[1mprocess[robot_state_publisher-6]: started with pid [112826][0m
+[1m[robot_state_publisher-6] process has finished cleanly
+log file: /home/bryan/.ros/log/b4c5d744-c4ea-11ef-8c5d-e90b56dcdc08/robot_state_publisher-6*.log[0m
+[robot_state_publisher-6] restarting process
+[1mprocess[robot_state_publisher-6]: started with pid [112840][0m
+[1m[robot_state_publisher-6] process has finished cleanly
+log file: /home/bryan/.ros/log/b4c5d744-c4ea-11ef-8c5d-e90b56dcdc08/robot_state_publisher-6*.log[0m
+[robot_state_publisher-6] restarting process
+[1mprocess[robot_state_publisher-6]: started with pid [112868][0m
+[1m[robot_state_publisher-6] process has finished cleanly
+log file: /home/bryan/.ros/log/b4c5d744-c4ea-11ef-8c5d-e90b56dcdc08/robot_state_publisher-6*.log[0m
+[robot_state_publisher-6] restarting process
+[1mprocess[robot_state_publisher-6]: started with pid [112890][0m
+[1m[robot_state_publisher-6] process has finished cleanly
+log file: /home/bryan/.ros/log/b4c5d744-c4ea-11ef-8c5d-e90b56dcdc08/robot_state_publisher-6*.log[0m
+[robot_state_publisher-6] restarting process
+[1mprocess[robot_state_publisher-6]: started with pid [112908][0m
+[1m[robot_state_publisher-6] process has finished cleanly
+log file: /home/bryan/.ros/log/b4c5d744-c4ea-11ef-8c5d-e90b56dcdc08/robot_state_publisher-6*.log[0m
+[robot_state_publisher-6] restarting process
+[1mprocess[robot_state_publisher-6]: started with pid [112924][0m
+[1m[robot_state_publisher-6] process has finished cleanly
+log file: /home/bryan/.ros/log/b4c5d744-c4ea-11ef-8c5d-e90b56dcdc08/robot_state_publisher-6*.log[0m
+[robot_state_publisher-6] restarting process
+[1mprocess[robot_state_publisher-6]: started with pid [112939][0m
+[1m[robot_state_publisher-6] process has finished cleanly
+log file: /home/bryan/.ros/log/b4c5d744-c4ea-11ef-8c5d-e90b56dcdc08/robot_state_publisher-6*.log[0m
+[robot_state_publisher-6] restarting process
+[1mprocess[robot_state_publisher-6]: started with pid [112968][0m
+[1m[robot_state_publisher-6] process has finished cleanly
+log file: /home/bryan/.ros/log/b4c5d744-c4ea-11ef-8c5d-e90b56dcdc08/robot_state_publisher-6*.log[0m
+[robot_state_publisher-6] restarting process
+[1mprocess[robot_state_publisher-6]: started with pid [112982][0m
+[1m[robot_state_publisher-6] process has finished cleanly
+log file: /home/bryan/.ros/log/b4c5d744-c4ea-11ef-8c5d-e90b56dcdc08/robot_state_publisher-6*.log[0m
+[robot_state_publisher-6] restarting process
+[1mprocess[robot_state_publisher-6]: started with pid [112991][0m
+[1m[robot_state_publisher-6] process has finished cleanly
+log file: /home/bryan/.ros/log/b4c5d744-c4ea-11ef-8c5d-e90b56dcdc08/robot_state_publisher-6*.log[0m
+[robot_state_publisher-6] restarting process
+[1mprocess[robot_state_publisher-6]: started with pid [113007][0m
+[1m[robot_state_publisher-6] process has finished cleanly
+log file: /home/bryan/.ros/log/b4c5d744-c4ea-11ef-8c5d-e90b56dcdc08/robot_state_publisher-6*.log[0m
+[robot_state_publisher-6] restarting process
+[1mprocess[robot_state_publisher-6]: started with pid [113022][0m
+[1m[robot_state_publisher-6] process has finished cleanly
+log file: /home/bryan/.ros/log/b4c5d744-c4ea-11ef-8c5d-e90b56dcdc08/robot_state_publisher-6*.log[0m
+[robot_state_publisher-6] restarting process
+[1mprocess[robot_state_publisher-6]: started with pid [113036][0m
+[1m[robot_state_publisher-6] process has finished cleanly
+log file: /home/bryan/.ros/log/b4c5d744-c4ea-11ef-8c5d-e90b56dcdc08/robot_state_publisher-6*.log[0m
+[robot_state_publisher-6] restarting process
+[1mprocess[robot_state_publisher-6]: started with pid [113065][0m
+[1m[robot_state_publisher-6] process has finished cleanly
+log file: /home/bryan/.ros/log/b4c5d744-c4ea-11ef-8c5d-e90b56dcdc08/robot_state_publisher-6*.log[0m
+[robot_state_publisher-6] restarting process
+[1mprocess[robot_state_publisher-6]: started with pid [113087][0m
+[33m[ WARN] [1735371581.165486070]: Shutdown request received.[0m
+[33m[ WARN] [1735371581.167087720]: Reason given for shutdown: [[/robot_state_publisher] Reason: new node registered with same name][0m
+[33m[ WARN] [1735371581.471486424]: Shutdown request received.[0m
+[33m[ WARN] [1735371581.473556912]: Reason given for shutdown: [[/robot_state_publisher] Reason: new node registered with same name][0m
+[33m[ WARN] [1735371581.783542288]: Shutdown request received.[0m
+[33m[ WARN] [1735371581.785271201]: Reason given for shutdown: [[/robot_state_publisher] Reason: new node registered with same name][0m
+[33m[ WARN] [1735371582.001154366]: Shutdown request received.[0m
+[33m[ WARN] [1735371582.005107666]: Reason given for shutdown: [[/robot_state_publisher] Reason: new node registered with same name][0m
+[33m[ WARN] [1735371582.216121502]: Shutdown request received.[0m
+[33m[ WARN] [1735371582.217634484]: Reason given for shutdown: [[/robot_state_publisher] Reason: new node registered with same name][0m
+[33m[ WARN] [1735371582.625184533]: Shutdown request received.[0m
+[33m[ WARN] [1735371582.626436853]: Reason given for shutdown: [[/robot_state_publisher] Reason: new node registered with same name][0m
+[33m[ WARN] [1735371582.635320242]: Shutdown request received.[0m
+[33m[ WARN] [1735371582.635368396]: Reason given for shutdown: [[/robot_state_publisher] Reason: new node registered with same name][0m
+[33m[ WARN] [1735371583.039495858]: Shutdown request received.[0m
+[33m[ WARN] [1735371583.040463130]: Reason given for shutdown: [[/robot_state_publisher] Reason: new node registered with same name][0m
+[33m[ WARN] [1735371583.356628389]: Shutdown request received.[0m
+[33m[ WARN] [1735371583.358052102]: Reason given for shutdown: [[/robot_state_publisher] Reason: new node registered with same name][0m
+[33m[ WARN] [1735371583.775243918]: Shutdown request received.[0m
+[33m[ WARN] [1735371583.777197814]: Reason given for shutdown: [[/robot_state_publisher] Reason: new node registered with same name][0m
+[33m[ WARN] [1735371584.097197757]: Shutdown request received.[0m
+[33m[ WARN] [1735371584.106319572]: Reason given for shutdown: [[/robot_state_publisher] Reason: new node registered with same name][0m
+[33m[ WARN] [1735371584.112048665]: Shutdown request received.[0m
+[33m[ WARN] [1735371584.112088586]: Reason given for shutdown: [[/robot_state_publisher] Reason: new node registered with same name][0m
+[33m[ WARN] [1735371584.429832426]: Shutdown request received.[0m
+[33m[ WARN] [1735371584.432312885]: Reason given for shutdown: [[/robot_state_publisher] Reason: new node registered with same name][0m
+[0m[ INFO] [1735371575.028401890, 1765.291000000]: Didn't receive robot state (joint angles) with recent timestamp within 1 seconds.
+Check clock synchronization if your are running ROS across multiple machines![0m
+[0m[ INFO] [1735371575.029421215, 1765.291000000]: Planning request received for MoveGroup action. Forwarding to planning pipeline.[0m
+[0m[ INFO] [1735371575.029678240, 1765.291000000]: Using planning pipeline 'ompl'[0m
+[0m[ INFO] [1735371575.033686269, 1765.295000000]: Planner configuration 'manipulator[RRT]' will use planner 'geometric::RRT'. Additional configuration parameters will be set when the planner is constructed.[0m
+[0m[ INFO] [1735371575.034488123, 1765.296000000]: manipulator/manipulator[RRT]: Starting planning with 1 states already in datastructure[0m
+[0m[ INFO] [1735371575.034544395, 1765.296000000]: manipulator/manipulator[RRT]: Starting planning with 1 states already in datastructure[0m
+[0m[ INFO] [1735371575.034584438, 1765.296000000]: manipulator/manipulator[RRT]: Starting planning with 1 states already in datastructure[0m
+[0m[ INFO] [1735371575.034652710, 1765.296000000]: manipulator/manipulator[RRT]: Starting planning with 1 states already in datastructure[0m
+[0m[ INFO] [1735371575.049323794, 1765.309000000]: manipulator/manipulator[RRT]: Created 11 states[0m
+[0m[ INFO] [1735371575.054471840, 1765.314000000]: manipulator/manipulator[RRT]: Created 25 states[0m
+[0m[ INFO] [1735371575.059768227, 1765.319000000]: manipulator/manipulator[RRT]: Created 22 states[0m
+[0m[ INFO] [1735371575.067529864, 1765.327000000]: manipulator/manipulator[RRT]: Created 33 states[0m
+[0m[ INFO] [1735371575.067679436, 1765.327000000]: ParallelPlan::solve(): Solution found by one or more threads in 0.033453 seconds[0m
+[0m[ INFO] [1735371575.067811057, 1765.327000000]: SimpleSetup: Path simplification took 0.000003 seconds and changed from 2 to 2 states[0m
+[0m[ INFO] [1735371576.823458827, 1766.998000000]: Execution request received[0m
+[0m[ INFO] [1735371562.183770564]: rviz version 1.14.25[0m
+[0m[ INFO] [1735371562.183874867]: compiled against Qt version 5.12.8[0m
+[0m[ INFO] [1735371562.183884576]: compiled against OGRE version 1.9.0 (Ghadamon)[0m
+[0m[ INFO] [1735371562.197899432]: Forcing OpenGl version 0.[0m
+[0m[ INFO] [1735371562.455917903, 1753.243000000]: Stereo is NOT SUPPORTED[0m
+[0m[ INFO] [1735371562.455970971, 1753.243000000]: OpenGL device: Mesa Intel(R) UHD Graphics 630 (CFL GT2)[0m
+[0m[ INFO] [1735371562.455991824, 1753.243000000]: OpenGl version: 4.6 (GLSL 4.6) limited to GLSL 1.4 on Mesa system.[0m
+[0m[ INFO] [1735371565.774172774, 1756.495000000]: Loading robot model 'ur5_robot'...[0m
+[0m[ INFO] [1735371565.774220213, 1756.495000000]: No root/virtual joint specified in SRDF. Assuming fixed joint[0m
+[0m[ INFO] [1735371565.863248759, 1756.577000000]: Starting planning scene monitor[0m
+[0m[ INFO] [1735371565.867279863, 1756.582000000]: Listening to '/move_group/monitored_planning_scene'[0m
+[0m[ INFO] [1735371566.144681564, 1756.850000000]: Constructing new MoveGroup connection for group 'manipulator' in namespace ''[0m
+[0m[ INFO] [1735371567.327380394, 1757.971000000]: Ready to take commands for planning group manipulator.[0m
+[0m[ INFO] [1735371576.843234153, 1767.017000000]: ABORTED: CONTROL_FAILED[0m
+[WARN] [1735371585.024624, 1774.257000]: Controller Spawner couldn't find the expected controller_manager ROS interface.
+[INFO] [1735371562.330877, 0.000000]: Controller Spawner: Waiting for service controller_manager/load_controller
+[WARN] [1735371585.025611, 1774.257000]: Controller Spawner couldn't find the expected controller_manager ROS interface.
+[INFO] [1735371562.365474, 0.000000]: Controller Spawner: Waiting for service controller_manager/load_controller
+[31m[gazebo-1] process has died [pid 111828, exit code 255, cmd /home/bryan/catkin_ws/src/gazebo_ros_pkgs/gazebo_ros/scripts/gzserver -u -e ode worlds/empty.world __name:=gazebo __log:=/home/bryan/.ros/log/b4c5d744-c4ea-11ef-8c5d-e90b56dcdc08/gazebo-1.log].
+log file: /home/bryan/.ros/log/b4c5d744-c4ea-11ef-8c5d-e90b56dcdc08/gazebo-1*.log[0m
+[31m[spawn_gazebo_model-3] process has died [pid 111838, exit code 1, cmd /home/bryan/catkin_ws/devel/lib/gazebo_ros/spawn_model -urdf -param robot_description -model robot -unpause -x 0 -y 0 -z 0 -R 0 -P 0 -Y 0 -J elbow_joint 0 -J shoulder_lift_joint 0 -J shoulder_pan_joint 0 -J wrist_1_joint 0 -J wrist_2_joint 0 -J wrist_3_joint 0 __name:=spawn_gazebo_model __log:=/home/bryan/.ros/log/b4c5d744-c4ea-11ef-8c5d-e90b56dcdc08/spawn_gazebo_model-3.log].
+log file: /home/bryan/.ros/log/b4c5d744-c4ea-11ef-8c5d-e90b56dcdc08/spawn_gazebo_model-3*.log[0m
+[31m[gazebo_gui-2] escalating to SIGTERM[0m
+[1m[robot_state_publisher-6] process has finished cleanly
+log file: /home/bryan/.ros/log/b4c5d744-c4ea-11ef-8c5d-e90b56dcdc08/robot_state_publisher-6*.log[0m
+[robot_state_publisher-6] restarting process
+[1mprocess[robot_state_publisher-6]: started with pid [113103][0m
+[1m[robot_state_publisher-6] process has finished cleanly
+log file: /home/bryan/.ros/log/b4c5d744-c4ea-11ef-8c5d-e90b56dcdc08/robot_state_publisher-6*.log[0m
+[robot_state_publisher-6] restarting process
+[1mprocess[robot_state_publisher-6]: started with pid [113111][0m
+[1m[robot_state_publisher-6] process has finished cleanly
+log file: /home/bryan/.ros/log/b4c5d744-c4ea-11ef-8c5d-e90b56dcdc08/robot_state_publisher-6*.log[0m
+[robot_state_publisher-6] restarting process
+[1mprocess[robot_state_publisher-6]: started with pid [113126][0m
+[1m[robot_state_publisher-6] process has finished cleanly
+log file: /home/bryan/.ros/log/b4c5d744-c4ea-11ef-8c5d-e90b56dcdc08/robot_state_publisher-6*.log[0m
+[robot_state_publisher-6] restarting process
+[1mprocess[robot_state_publisher-6]: started with pid [113147][0m
+[1m[robot_state_publisher-6] process has finished cleanly
+log file: /home/bryan/.ros/log/b4c5d744-c4ea-11ef-8c5d-e90b56dcdc08/robot_state_publisher-6*.log[0m
+[robot_state_publisher-6] restarting process
+[1mprocess[robot_state_publisher-6]: started with pid [113176][0m
+[1m[robot_state_publisher-6] process has finished cleanly
+log file: /home/bryan/.ros/log/b4c5d744-c4ea-11ef-8c5d-e90b56dcdc08/robot_state_publisher-6*.log[0m
+[robot_state_publisher-6] restarting process
+[1mprocess[robot_state_publisher-6]: started with pid [113184][0m
+[1m[robot_state_publisher-6] process has finished cleanly
+log file: /home/bryan/.ros/log/b4c5d744-c4ea-11ef-8c5d-e90b56dcdc08/robot_state_publisher-6*.log[0m
+[robot_state_publisher-6] restarting process
+[1mprocess[robot_state_publisher-6]: started with pid [113199][0m
+[1m[robot_state_publisher-6] process has finished cleanly
+log file: /home/bryan/.ros/log/b4c5d744-c4ea-11ef-8c5d-e90b56dcdc08/robot_state_publisher-6*.log[0m
+[robot_state_publisher-6] restarting process
+[1mprocess[robot_state_publisher-6]: started with pid [113215][0m
+[1m[robot_state_publisher-6] process has finished cleanly
+log file: /home/bryan/.ros/log/b4c5d744-c4ea-11ef-8c5d-e90b56dcdc08/robot_state_publisher-6*.log[0m
+[robot_state_publisher-6] restarting process
+[1mprocess[robot_state_publisher-6]: started with pid [113230][0m
+[1m[robot_state_publisher-6] process has finished cleanly
+log file: /home/bryan/.ros/log/b4c5d744-c4ea-11ef-8c5d-e90b56dcdc08/robot_state_publisher-6*.log[0m
+[robot_state_publisher-6] restarting process
+[1mprocess[robot_state_publisher-6]: started with pid [113245][0m
+[1m[robot_state_publisher-6] process has finished cleanly
+log file: /home/bryan/.ros/log/b4c5d744-c4ea-11ef-8c5d-e90b56dcdc08/robot_state_publisher-6*.log[0m
+[robot_state_publisher-6] restarting process
+[1mprocess[robot_state_publisher-6]: started with pid [113279][0m
+[rviz_bryan_ROG_Strix_G531GD_G531GD_111787_2404944357669235068-8] killing on exit
+[move_group-7] killing on exit
+[robot_state_publisher-6] killing on exit
+[controller_spawner-4] killing on exit
+[gazebo_gui-2] killing on exit
+[gazebo_controller_spawner-5] killing on exit
+shutting down processing monitor...
+... shutting down processing monitor complete
+[1mdone[0m

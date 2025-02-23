@@ -21,6 +21,7 @@
   <!-- Spawn the robot in Gazebo -->
   <node name="spawn_gazebo_model" pkg="gazebo_ros" type="spawn_model" args="-urdf -param robot_description -model robot $(arg unpause) $(arg world_pose) $(arg initial_joint_positions)"
     respawn="false" output="screen" />
+  
 
   <!-- Load the controller parameters onto the parameter server -->
   <rosparam file="$(find ur5_tcp_moveit_config)/config/gazebo_controllers.yaml" />
@@ -31,4 +32,6 @@
 
   <!-- Given the published joint states, publish tf for the robot links -->
   <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="true" output="screen" />
+
+  
 </launch>
