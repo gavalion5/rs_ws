@@ -5,7 +5,7 @@ from control_msgs.msg import JointControllerState
 from std_msgs.msg import Float64
 import time
 import roboticstoolbox as rtb
-from math import cos,sin,pi
+from math import cos,sin
 import numpy as np
 
 
@@ -246,7 +246,7 @@ def rcm_jacobian1(joint_angles,dh_params, dh_params_ee, p_ee,p_wrist_3,depth): #
 def control_speed1(joint_angles, p_goal, p_trocar,dh_params_ee,dh_params,depth_velocity): # w is [0,0,0,0,0,0, lambda0 - lambda]
     global v_prev
     global depth
-    elapsed_time = 0.02
+    elapsed_time = 0.01
     # start_time = time.time()
     alpha = 0.2 #low - accurate and responsive; high - smoother
     depth = depth + depth_velocity*elapsed_time
@@ -284,7 +284,7 @@ def control_speed2(joint_angles, p_goal, p_trocar,dh_params_ee,dh_params,depth_v
     global v_prev
     global depth
     global counter_path
-    elapsed_time = 0.02
+    elapsed_time = 0.01
     # start_time = time.time()
     alpha = 0.2 #low - accurate and responsive; high - smoother
     depth = depth + depth_velocity*elapsed_time
@@ -319,13 +319,13 @@ def control_speed2(joint_angles, p_goal, p_trocar,dh_params_ee,dh_params,depth_v
     joint_velocity_command = J_dls @ gain_p @ error_p +(np.eye(7) - J_dls@J)@w
     return joint_velocity_command
 
-def control_speed3(joint_angles, p_goal, p_trocar,dh_params_ee,dh_params,depth_velocity): # w is [0,0,0,0,0,0, lambda0 - lambda]
+def control_speed3(joint_angles, p_goal, p_trocar,dh_params_ee,dh_params,depth_velocity,p_obstacles): # w is [0,0,0,0,0,0, lambda0 - lambda]
     global v_prev
     global depth
     global counter_path
     global path_generated
-    elapsed_time = 0.02
-    n=8
+    elapsed_time = 0.01
+    n=6
     # start_time = time.time()
     alpha = 0.2 #low - accurate and responsive; high - smoother
     depth = depth + depth_velocity*elapsed_time
@@ -334,10 +334,8 @@ def control_speed3(joint_angles, p_goal, p_trocar,dh_params_ee,dh_params,depth_v
     L = rcm_jacobian1(joint_angles,dh_params, dh_params_ee, p_ee, p_wrist_3,depth)
     J,p_rcm = L[0], L[1]
     counter_path = counter_path%n
-    print(counter_path)
     if not counter_path:
-        print("SSA")
-        path_generated = generate_path_steps(p_ee,p_goal, n)
+        path_generated = generate_path_steps(p_wrist_3, p_ee,p_goal, n,p_obstacles)
     # p_wrist_3 = forward_kinematics(joint_angles, dh_params)
     damping_multiplier = 0.01
     damping = np.eye(6) * damping_multiplier
@@ -345,7 +343,6 @@ def control_speed3(joint_angles, p_goal, p_trocar,dh_params_ee,dh_params,depth_v
     # v_repulse = vpf_repulse_link(p_wrist_3, p_ee, p_obstacles, p_rcm)
     # v_attract = vpf_attract(p_ee, p_goal)
     # v_desired = v_repulse+v_attract
-    print(path_generated)
     p_desired = path_generated[counter_path]
     counter_path +=1
     counter_path = counter_path%n
@@ -354,14 +351,23 @@ def control_speed3(joint_angles, p_goal, p_trocar,dh_params_ee,dh_params,depth_v
     depth_desired = 0.3 - np.linalg.norm(p_desired - p_trocar)
     w = np.array([0,0,0,0,0,0, depth_desired - depth])
     # gain_p = np.array([[0.3,0,0,0,0,0],[0,0.3,0,0,0,0],[0,0,0.15,0,0,0],[0,0,0,2.5,0,0],[0,0,0,0,2.5,0],[0,0,0,0,0,2.5]])
-    gain_p = np.array([[0.7,0,0,0,0,0],[0,0.7,0,0,0,0],[0,0,0.7,0,0,0],[0,0,0,2.5,0,0],[0,0,0,0,2.5,0],[0,0,0,0,0,2.5]])
+    gain_p = np.array([[0.7,0,0,0,0,0],[0,0.7,0,0,0,0],[0,0,0.35,0,0,0],[0,0,0,5.5,0,0],[0,0,0,0,5.5,0],[0,0,0,0,0,5.5]])
     error_p = np.zeros(6)
     error_p[:3] = p_desired - p_ee
+    l1 = p_trocar - p_wrist_3 
+    l2 = p_ee - p_wrist_3
+    l3 = np.dot(l1,l2)/(np.linalg.norm(l1)**2)*l1
+    rcm_error = np.linalg.norm(-l2+l3)
+    # cos_theta = np.dot(l1,l2)/np.linalg.norm(l1)/np.linalg.norm(l2)
+    # rcm_error = (np.linalg.norm(l2)**2+np.linalg.norm(l1)**2-2*np.linalg.norm(l1)*np.linalg.norm(l2)*cos_theta)**0.5
+    
+    rcm_error_list.append(rcm_error)
+    
+    time_stamp_list.append(time.time())
     error_p[3:] = p_trocar - p_rcm
-    if np.linalg.norm(p_ee-p_goal)<0.01:
+    if np.linalg.norm(p_ee-p_goal)<0.005:
         return np.zeros(7)
     joint_velocity_command = J_dls @ gain_p @ error_p +(np.eye(7) - J_dls@J)@w
-    print(joint_velocity_command)
     return joint_velocity_command
 
 def generate_path(p_ee, p_goal):
@@ -372,24 +378,43 @@ def generate_path(p_ee, p_goal):
         v_repulse =  np.array([0,0,0])#vpf_repulse_link(p_wrist_3, p_ee, p_obstacles, p_trocar)
         v_attract = vpf_attract(p_ee, p_goal)
         v_desired = v_repulse+v_attract
-        p_ee += v_desired * 0.02
+        p_ee += v_desired * 0.01
         path_generated.append(np.copy(p_ee))
     path_finish = True
 
-def generate_path_steps(p_ee1, p_goal,n):
+def generate_path_steps(p_wrist_3,p_ee1, p_goal,n,p_obstacles):
     # global path_finish
     # path_generated.append(np.copy(p_ee))
     path_generated = []
     step = 0
     p_ee = np.copy(p_ee1)
     while step <n:
-
-        v_repulse =  np.array([0,0,0])#vpf_repulse_link(p_wrist_3, p_ee, p_obstacles, p_trocar)
+        v_repulse =  vpf_repulse_link(p_wrist_3,p_ee, p_obstacles,2) #np.array([0,0,0])#vpf_repulse_link(p_wrist_3, p_ee, p_obstacles, p_trocar)
         v_attract = vpf_attract(p_ee, p_goal)
-        v_desired = v_repulse+v_attract
-        p_ee += v_desired * 0.02
+        closest_dist = float("inf")
+        closest_obs = p_ee
+        for i in p_obstacles:
+            temp = np.array([i[0],i[1],p_ee[2]])
+            if np.linalg.norm(temp - p_ee)<closest_dist:
+                closest_obs = temp
+        v_tan = np.cross(closest_obs-p_ee, v_repulse)/np.linalg.norm(closest_obs-p_ee) * 0.1
+        v_tan = np.array([0,0,0])
+        print("v attract ", v_attract )
+        print("v repulse ", v_repulse )
+        v_desired = v_repulse+v_attract +v_tan
+        print("v desired " ,np.linalg.norm(v_desired))
+        # if np.linalg.norm(v_desired) > 0.5:
+        #     v_desired = v_desired * 0.5/np.linalg.norm(v_desired)
+        if np.linalg.norm(v_desired) < 0.005:
+            v_desired = v_repulse+v_attract*3 +v_tan
+        print("distance ", np.linalg.norm(p_ee - p_goal))
+        if np.linalg.norm(p_ee - p_goal) < 0.008:
+            print("flag 1")
+            v_desired = v_attract
+        p_ee += v_desired * 0.01
         path_generated.append(np.copy(p_ee))
         step +=1
+        print("v desired recalculated" ,np.linalg.norm(v_desired))
     # path_finish = True
     return path_generated
         
@@ -399,34 +424,13 @@ def vpf_attract(p_ee, p_goal):
     :param p_ee: current 3*1 vector end-effector pose (position)
     :param p_goal: goal 3*1 vector
     """ 
-    k_att = 3
-    if np.linalg.norm(p_ee-p_goal)<0.4:
-        k_att = k_att* 3 
+    k_att = 20
+    # if np.linalg.norm(p_ee-p_goal)<0.04:
+    #     k_att = k_att* 3
+    if np.linalg.norm(p_ee - p_goal) > 0.0155:
+        print("flag 2")
+        return - (p_ee - p_goal)/np.linalg.norm(p_ee - p_goal) * .1
     return -k_att * (p_ee - p_goal)
-
-def vpf_repulse(p_ee, p_obstacles): #EE point vs obstacle
-    """
-    :param p_ee: current 3*1 vector end-effector pose (position)
-    :param p_obstacle: list of obstacle (3*1 vector)
-    """ 
-    d_thres = 0.5
-    k_rep = 0.5
-    v_rep = np.zeros(3)
-    for i in p_obstacles:
-        diff = p_ee - i
-        distance = np.linalg.norm(diff)
-
-        if distance < d_thres and distance > 0:
-            repulsion_magnitude = k_rep*(1/distance - 1/ d_thres) * (1/distance)**2
-            repulsion_direction = diff/distance
-            v_rep += repulsion_magnitude * repulsion_direction
-            # repulsion_magnitude = k_rep * (1.0 / (distance**2) - 1.0 / (d_thres**2))
-            # repulsion_direction = diff / (distance**3)  # Normalize and scale
-
-            # k_rep * (ee_pos - obstacle) / (dist**2 + epsilon)
-
-            # v_rep += repulsion_magnitude * repulsion_direction
-    return v_rep
 
 def check_apf (p_desired, p_goal):
     res = []
@@ -440,72 +444,42 @@ def check_apf (p_desired, p_goal):
         # J_dls = J.T @ np.linalg.pinv((J@J.T + damping)) # damped least square method, dont forget to inverse
         # v_repulse = vpf_repulse_link(p_wrist_3, p_ee, p_obstacles, p_rcm)
         v_attract = vpf_attract(p_desired, p_goal)
+        
         v_desired = v_attract
-        p_desired = p_desired+v_desired * 0.02
+        p_desired = p_desired+v_desired * 0.01
         res.append(p_desired)
         # print(p_desired)
     return res
 
 
-
-
-
-# # print(check_apf(p_desired, p_goal))
-
-import matplotlib.pyplot as plt
-from mpl_toolkits.mplot3d import Axes3D
-
-# p_desired = np.array([0.04590928, -0.99686627, 0.22717402])
-# p_trocar = np.array([0.04590928, -0.99686627, 0.22717402])
-# p_goal = np.array([0.04325266, -1.03956855, 0.18399166])
-# # Example: List of 3D coordinates
-# points = np.array(check_apf(p_desired, p_goal))
-# # Extract X, Y, Z coordinates
-# X, Y, Z = points[:,0], points[:,1], points[:,2]
-
-# # Create figure
-# fig = plt.figure()
-# ax = fig.add_subplot(111, projection='3d')
-
-# # Plot the line
-# ax.plot3D(X, Y, Z, 'bo-', linewidth=2, markersize=5)  # 'bo-' -> Blue line with circle markers
-
-# # Labels
-# ax.set_xlabel('X Axis')
-# ax.set_ylabel('Y Axis')
-# ax.set_zlabel('Z Axis')
-# ax.set_title('3D Line Plot')
-
-# # Show plot
-# plt.show()
-
-
-def vpf_repulse_link(p_wrist_3,p_ee, p_obstacles, p_rcm): #EE link vs obstacle, for 3D
+def vpf_repulse_link(p_wrist_3,p_ee, p_obstacles,n): #EE link vs obstacle, for 3D
     """
     :param p_ee: current 3*1 vector end-effector pose (position)
     :param p_obstacle: list of obstacle (3*1 vector)
     """ 
-    d_thres = 0.5
-    k_rep = 0.5
+    d_thres = 0.05
+    k_rep = 0.000005
     v_rep = np.zeros(3)
     for i in p_obstacles:
-        distance_projected = np.dot((i-p_wrist_3), (p_ee-p_wrist_3))/np.linalg.norm(p_ee - p_wrist_3) #scalar
-        p_obs_proj = p_wrist_3 + distance_projected * (p_ee - p_wrist_3)/np.linalg.norm(p_ee - p_wrist_3)
-        # distance = np.linalg.norm(i -p_obs_proj)
-        diff = p_obs_proj - i #vector from obstacle to closest link
-        distance = np.linalg.norm(diff)
+        temp = np.zeros(3)
+        min_distance = float("inf")
+        for j in range(n):
+            x = np.copy(i)
+            x[2] = x[2]+j*0.0525/n
+            distance_projected = np.dot((x-p_wrist_3), (p_ee-p_wrist_3))/np.linalg.norm(p_ee - p_wrist_3) #scalar
+            obj_to_link = -(x-p_wrist_3) + distance_projected * (p_ee-p_wrist_3)/np.linalg.norm(p_ee - p_wrist_3) #cartesian displacement from obs to link 
+            distance = np.linalg.norm(obj_to_link)
+            if  distance_projected < 0.3 and distance < min_distance and distance < d_thres and distance > 0:
+                repulsion_magnitude = k_rep*(1/distance - 1/ d_thres) * (1/distance)**2
+                repulsion_direction = obj_to_link/distance
+                # proportion_rcm_to_obs_proj = (np.linalg.norm(p_ee-p_trocar) / np.linalg.norm(p_obs_proj-p_trocar))
+                temp = repulsion_magnitude * repulsion_direction #* proportion_rcm_to_obs_proj #(np.linalg.norm(p_ee-p_rcm) / np.linalg.norm(p_obs_proj-p_rcm))
+                # repulsion_magnitude = k_rep * (1.0 / (distance**2) - 1.0 / (d_thres**2))
+                # repulsion_direction = diff / (distance**3)  # Normalize and scale
 
-        if distance < d_thres and distance > 0:
-            repulsion_magnitude = k_rep*(1/distance - 1/ d_thres) * (1/distance)**2
-            repulsion_direction = diff/distance
-            proportion_rcm_to_obs_proj = (np.linalg.norm(p_ee-p_rcm) / np.linalg.norm(p_obs_proj-p_rcm))
-            v_rep += repulsion_magnitude * repulsion_direction * proportion_rcm_to_obs_proj #(np.linalg.norm(p_ee-p_rcm) / np.linalg.norm(p_obs_proj-p_rcm))
-            # repulsion_magnitude = k_rep * (1.0 / (distance**2) - 1.0 / (d_thres**2))
-            # repulsion_direction = diff / (distance**3)  # Normalize and scale
-
-            # k_rep * (ee_pos - obstacle) / (dist**2 + epsilon)
-
-            # v_rep += repulsion_magnitude * repulsion_direction
+                # k_rep * (ee_pos - obstacle) / (dist**2 + epsilon)
+        v_rep+=temp
+                # v_rep += repulsion_magnitude * repulsion_direction
     return v_rep
 
 
@@ -533,7 +507,7 @@ def get_joint_angle(joint_state :JointState):
     current_time = joint_state.header.stamp.to_sec()
     if prev_time is not None:
         elapsed_time = current_time - prev_time
-        rospy.loginfo("Time elapsed between messages: %.6f seconds", elapsed_time)
+        # rospy.loginfo("Time elapsed between messages: %.6f seconds", elapsed_time)
     prev_time = current_time
     
 
@@ -554,6 +528,119 @@ dh_params_with_ee = [
     [0.0, -np.pi/2, 0.09465, 0.0],
     [0.0, 0.0, 0.0823+0.3, 0.0]
 ]
+
+# p_trocar = [1.34,-1.515, 1.557, -2.166, -1.315, 0]
+# print(forward_kinematics(p_trocar, dh_params_with_ee)[:3,3])
+# p_goal = [1.473,-1.219, 1.604, -2.593, -1.508, 0]
+# print(forward_kinematics(p_goal, dh_params_with_ee)[:3,3])
+# p_obs = [-1.387,-2.847, 0.298, -2.157, 1.580, 0]
+# # print(forward_kinematics(p_obs, dh_params_with_ee)[:3,3])
+# x = [["0.04867848 -0.83445059 0.04993548"],["0.04867848 -0.79070059 0.04993548"],["0.00492848 -0.81257559 0.04993548"],["0.00492848 -0.76882559 0.04993548"], ["0.00492848 -0.85632559 0.04993548"]]  
+# p_obstacles =[]
+# for i in x:
+#     p_obstacles.append((list(map(lambda x : float(x),i[0].split(" ")))))
+# res = []
+# # print(np.array([0.04867848, -0.79070059, 0.04993548]))
+# for i in range(len(p_obstacles)):
+#     res.append([round(p_obstacles[i][0]-0.0875, 8) , p_obstacles[i][1] , p_obstacles[i][2]])
+# # p_obstacles = [map(lambda x : float(x),"0.04867848 -0.79070059 0.04993548".split(" "))]
+# p_obstacles.extend(res)
+# print(p_obstacles)
+
+
+# '''
+# apf with steps
+delta_target = 0.013
+target_heigth = 0.08
+rcm_error_list = []
+time_stamp_list = []
+goal_test_1_points = [np.array([0.05312177, -0.82213129,  0.11547495]), np.array([-0.035, -0.970, 0.120]), np.array([0.051, -0.722,  0.110]), np.array([0.054, -0.869,  0.130]), np.array([-0.164, -0.729,  0.200]),np.array([-0.134, -0.799,  0.200]),np.array([-0.114, -0.739,  0.150]),np.array([-0.08257152, -0.83632559, 0.080]), np.array([-0.074, -0.870, 0.075]), np.array([-0.074, -0.900, 0.065]), np.array([-0.174, -0.800, 0.115]), np.array([-0.134, -0.810, 0.145]), np.array([-0.104, -0.810, 0.215]), np.array([0.04767848, -0.72070059, 0.07993548]), np.array([-0.124, -0.810, 0.19]), np.array([0.04767848, -0.82070059, 0.1903548]), np.array([0.04967848, -0.80070059, 0.1703548]), np.array([0.05167848, -0.86070059, 0.1503548]), np.array([0.05367848, -0.88070059, 0.1103548]), np.array([-0.10367848, -0.68070059, 0.1303548])] 
+p_obstacles = [[0.04867848, -0.83445059, 0.04993548], [0.04867848, -0.79070059, 0.04993548], [0.00492848, -0.81257559, 0.04993548], [0.00492848, -0.76882559, 0.04993548], [0.00492848, -0.85632559, 0.04993548], [-0.03882152, -0.83445059, 0.04993548], [-0.03882152, -0.79070059, 0.04993548], [-0.08257152, -0.81257559, 0.04993548], [-0.08257152, -0.76882559, 0.04993548], [-0.08257152, -0.85632559, 0.04993548]]
+goal_test_2_points = []
+for i in p_obstacles:
+    goal_test_2_points.append([i[0] + delta_target, i[1], target_heigth])
+    goal_test_2_points.append([i[0] - delta_target, i[1], target_heigth])
+    goal_test_2_points.append([i[0] , i[1] + delta_target, target_heigth])
+    goal_test_2_points.append([i[0] , i[1] - delta_target, target_heigth])
+    # goal_test_2_points.append(i[], i[], 0.01)
+if __name__ == "__main__":
+    global counter_path
+    counter_path =0
+    # path_finish = False
+    # p_trocar = np.array([0.04590928, -0.99686627, 0.22717402]) # setup 1
+    
+    
+    p_trocar = np.array([0.04248387, -0.71920688 , 0.23206623])
+    # p_goal = np.array([0.04325266, -1.03956855, 0.18399166]) # setup 1 test 1
+    # p_goal = np.array([0.03325266, -1.13956855, 0.14399166]) # setup 1 test 2
+    # p_goal = np.array([0.05312177, -0.82213129,  0.09047495])
+    # p_goal = np.array([0.05312177, -0.88213129,  0.09047495])
+    # p_goal = np.array([0.05312177 - 0.04375 *2, -0.82213129,  0.09047495])
+    # p_goal = np.array([0.04867848 + 0, -0.83445059 + 0.012, 0.07])
+    p_goal = np.array(goal_test_2_points[6])
+    
+    depth_velocity = 0
+    depth = 0.3
+    elapsed_time = 0
+    v_prev = np.array([0,0,0,0,0,0])
+    prev_time = None
+    joint_T = {} 
+    rospy.init_node("VPF_controller")
+    joint_names = []
+    joint_names_in_order = ['shoulder_pan', 'shoulder_lift', 'elbow', 'wrist_1', 'wrist_2', 'wrist_3']
+    joint_angles_in_order=[0,0,0,0,0,0]
+    pub_dic = {}
+    joint_velocity_data={}
+    joint_position_data={}
+    sub = rospy.Subscriber(f"/joint_states", JointState, callback=get_joint_angle)
+    for i in joint_names_in_order:
+        pub_dic[i] = [rospy.Publisher(f"/{i}_joint_velocity_controller/command", Float64, queue_size=10),f"/{i}_joint_velocity_controller/command"]
+    x = rospy.Publisher(f"/shoulder_pan_joint_velocity_controller/command",Float64, queue_size=10)
+    rospy.loginfo("Node is runnng")
+    rate = rospy.Rate(100)
+    while not rospy.is_shutdown():
+        try :
+            # rospy.loginfo(joint_position_data)
+            # print(len(pub_dic))
+            if len (joint_position_data) == 6: #subscriber need some time to load
+                
+                for i in range(len(joint_names_in_order)):
+                    joint_angles_in_order[i] = joint_position_data[joint_names_in_order[i]]
+
+                # do some calculation
+                joint_vel = control_speed3(joint_angles_in_order, p_goal, p_trocar,dh_params_with_ee,dh_params,depth_velocity,p_obstacles)
+                depth_velocity = joint_vel[6]
+                # joint_vel = control_speed1(joint_angles_in_order, p_goal, p_trocar,dh_params_with_ee, dh_params)
+                # depth = depth + joint_vel[6]*0.01 # update depth after each iteration
+                # for i in range(len(joint_names_in_order)):
+                #     joint_angles_in_order[i] = joint_position_data[joint_names_in_order[i]]
+                for i in range(len(joint_names_in_order)):
+                    pub_dic[joint_names_in_order[i]][0].publish(joint_vel[i])
+                if not np.linalg.norm(joint_vel):
+                    rospy.loginfo("goal reached")
+                    break
+
+                # control()
+                # control(joint_velocity_data, p_goal, p_trocar,dh_params_ee,dh_params,w)
+                # pub_dic["shoulder_pan"][0].pub
+                
+        except RuntimeError:
+            rospy.logwarn("error")
+            pass
+        rate.sleep()
+# '''
+start_time = time_stamp_list[0]
+for i in range(len(time_stamp_list)):
+    time_stamp_list[i] = time_stamp_list[i]-start_time
+res = np.array([rcm_error_list,time_stamp_list]).T
+np.savetxt("rcm error.csv", res, delimiter=",")
+print("max deviation ", max(rcm_error_list[1:]))
+print("avg deviation ", sum(rcm_error_list[1:])/(len(rcm_error_list)-1))
+# print(len(goal_test_1_points))
+# for i in goal_test_1_points:
+#     print(str(list(i)).replace(",","").replace("[","").replace("]",""))
+# np.savetxt("time_stamp.csv", tiime_stamp_list, delimiter=",")
+
 
 # z = time.time()
 # elapsed_time = 1
@@ -590,8 +677,8 @@ dh_params_with_ee = [
 # L_pee = []
 # res = control_speed1(joint_angles, p_goal, p_trocar,dh_params_with_ee,dh_params,depth_velocity)
 # while np.linalg.norm(res) > 0.0000000000001:
-#     depth = depth + res[6]*0.02
-#     joint_angles += res[:6]*0.02
+#     depth = depth + res[6]*0.01
+#     joint_angles += res[:6]*0.01
 #     L.append(res)
 #     res = control_speed1(joint_angles, p_goal, p_trocar,dh_params_with_ee,dh_params,depth_velocity)
 #     print(np.linalg.norm(res))
@@ -604,14 +691,14 @@ dh_params_with_ee = [
 # print(check_apf(p_desired, p_goal)[0])
 # print(control_speed1(joint_angles, p_goal, p_trocar,dh_params_with_ee,dh_params,depth_velocity))
 
-# '''
+'''
 # control algo with reactive apf
 if __name__ == "__main__":
     p_trocar = np.array([0.04590928, -0.99686627, 0.22717402])
     # p_goal = np.array([0.04325266, -1.03956855, 0.18399166]) # test 1
     p_goal = np.array([0.03325266, -1.13956855, 0.14399166]) #test 2
     p_obstacles =[]
-    depth_velocity = 0
+    depth_velocity = 0e
     depth = 0.3
     elapsed_time = 0
     v_prev = np.array([0,0,0,0,0,0])
@@ -629,7 +716,7 @@ if __name__ == "__main__":
         pub_dic[i] = [rospy.Publisher(f"/{i}_joint_velocity_controller/command", Float64, queue_size=10),f"/{i}_joint_velocity_controller/command"]
     x = rospy.Publisher(f"/shoulder_pan_joint_velocity_controller/command",Float64, queue_size=10)
     rospy.loginfo("Node is runnng")
-    rate = rospy.Rate(50)
+    rate = rospy.Rate(100)
     while not rospy.is_shutdown():
         try :
             rospy.loginfo(joint_position_data)
@@ -643,7 +730,7 @@ if __name__ == "__main__":
                 joint_vel = control_speed1(joint_angles_in_order, p_goal, p_trocar,dh_params_with_ee,dh_params,depth_velocity)
                 depth_velocity = joint_vel[6]
                 # joint_vel = control_speed1(joint_angles_in_order, p_goal, p_trocar,dh_params_with_ee, dh_params)
-                # depth = depth + joint_vel[6]*0.02 # update depth after each iteration
+                # depth = depth + joint_vel[6]*0.01 # update depth after each iteration
                 # for i in range(len(joint_names_in_order)):
                 #     joint_angles_in_order[i] = joint_position_data[joint_names_in_order[i]]
                 for i in range(len(joint_names_in_order)):
@@ -657,67 +744,6 @@ if __name__ == "__main__":
                 # pub_dic["shoulder_pan"][0].pub
                 
         except:
-            rospy.logwarn("error")
-            pass
-        rate.sleep()
-# '''
-
-'''
-# apf with steps
-if __name__ == "__main__":
-    global counter_path
-    counter_path =0
-    # path_finish = False
-    p_trocar = np.array([0.04590928, -0.99686627, 0.22717402])
-    # p_goal = np.array([0.04325266, -1.03956855, 0.18399166]) # test 1
-    p_goal = np.array([0.03325266, -1.13956855, 0.14399166]) #test 2
-    p_obstacles =[]
-    depth_velocity = 0
-    depth = 0.3
-    elapsed_time = 0
-    v_prev = np.array([0,0,0,0,0,0])
-    prev_time = None
-    joint_T = {} 
-    rospy.init_node("VPF_controller")
-    joint_names = []
-    joint_names_in_order = ['shoulder_pan', 'shoulder_lift', 'elbow', 'wrist_1', 'wrist_2', 'wrist_3']
-    joint_angles_in_order=[0,0,0,0,0,0]
-    pub_dic = {}
-    joint_velocity_data={}
-    joint_position_data={}
-    sub = rospy.Subscriber(f"/joint_states", JointState, callback=get_joint_angle)
-    for i in joint_names_in_order:
-        pub_dic[i] = [rospy.Publisher(f"/{i}_joint_velocity_controller/command", Float64, queue_size=10),f"/{i}_joint_velocity_controller/command"]
-    x = rospy.Publisher(f"/shoulder_pan_joint_velocity_controller/command",Float64, queue_size=10)
-    rospy.loginfo("Node is runnng")
-    rate = rospy.Rate(50)
-    while not rospy.is_shutdown():
-        try :
-            rospy.loginfo(joint_position_data)
-            # print(len(pub_dic))
-            if len (joint_position_data) == 6: #subscriber need some time to load
-                
-                for i in range(len(joint_names_in_order)):
-                    joint_angles_in_order[i] = joint_position_data[joint_names_in_order[i]]
-
-                # do some calculation
-                joint_vel = control_speed3(joint_angles_in_order, p_goal, p_trocar,dh_params_with_ee,dh_params,depth_velocity)
-                depth_velocity = joint_vel[6]
-                # joint_vel = control_speed1(joint_angles_in_order, p_goal, p_trocar,dh_params_with_ee, dh_params)
-                # depth = depth + joint_vel[6]*0.02 # update depth after each iteration
-                # for i in range(len(joint_names_in_order)):
-                #     joint_angles_in_order[i] = joint_position_data[joint_names_in_order[i]]
-                for i in range(len(joint_names_in_order)):
-                    pub_dic[joint_names_in_order[i]][0].publish(joint_vel[i])
-                if not np.linalg.norm(joint_vel):
-                    rospy.loginfo("goal reached")
-                    break
-
-                # control()
-                # control(joint_velocity_data, p_goal, p_trocar,dh_params_ee,dh_params,w)
-                # pub_dic["shoulder_pan"][0].pub
-                
-        except RuntimeError:
             rospy.logwarn("error")
             pass
         rate.sleep()
@@ -749,7 +775,7 @@ if __name__ == "__main__":
         pub_dic[i] = [rospy.Publisher(f"/{i}_joint_velocity_controller/command", Float64, queue_size=10),f"/{i}_joint_velocity_controller/command"]
     x = rospy.Publisher(f"/shoulder_pan_joint_velocity_controller/command",Float64, queue_size=10)
     rospy.loginfo("Node is runnng")
-    rate = rospy.Rate(50)
+    rate = rospy.Rate(100)
     path_generated = []
     generate_path(p_trocar, p_goal)
     print(path_generated)
@@ -767,7 +793,7 @@ if __name__ == "__main__":
                 joint_vel = control_speed2(joint_angles_in_order, p_goal, p_trocar,dh_params_with_ee,dh_params,depth_velocity)
                 depth_velocity = joint_vel[6]
                 # joint_vel = control_speed1(joint_angles_in_order, p_goal, p_trocar,dh_params_with_ee, dh_params)
-                # depth = depth + joint_vel[6]*0.02 # update depth after each iteration
+                # depth = depth + joint_vel[6]*0.01 # update depth after each iteration
                 # for i in range(len(joint_names_in_order)):
                 #     joint_angles_in_order[i] = joint_position_data[joint_names_in_order[i]]
                 for i in range(len(joint_names_in_order)):

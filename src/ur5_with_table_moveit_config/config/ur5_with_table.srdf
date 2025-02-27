@@ -52,6 +52,30 @@
         <joint name="wrist_2_joint" value="-1.508"/>
         <joint name="wrist_3_joint" value="-0.086"/>
     </group_state>
+    <group_state name="trocar2" group="manipulator">
+        <joint name="elbow_joint" value="1.557"/>
+        <joint name="shoulder_lift_joint" value="-1.515"/>
+        <joint name="shoulder_pan_joint" value="1.340"/>
+        <joint name="wrist_1_joint" value="-2.166"/>
+        <joint name="wrist_2_joint" value="-1.315"/>
+        <joint name="wrist_3_joint" value="-0.198"/>
+    </group_state>
+    <group_state name="checkpoint_1" group="manipulator">
+        <joint name="elbow_joint" value="1.604"/>
+        <joint name="shoulder_lift_joint" value="-1.219"/>
+        <joint name="shoulder_pan_joint" value="1.473"/>
+        <joint name="wrist_1_joint" value="-2.593"/>
+        <joint name="wrist_2_joint" value="-1.508"/>
+        <joint name="wrist_3_joint" value="3.073"/>
+    </group_state>
+    <group_state name="obs_1" group="manipulator">
+        <joint name="elbow_joint" value="0.298"/>
+        <joint name="shoulder_lift_joint" value="-2.847"/>
+        <joint name="shoulder_pan_joint" value="-1.387"/>
+        <joint name="wrist_1_joint" value="-2.157"/>
+        <joint name="wrist_2_joint" value="1.580"/>
+        <joint name="wrist_3_joint" value="0"/>
+    </group_state>
     <!--DISABLE COLLISIONS: By default it is assumed that any link of the robot could potentially come into collision with any other link in the robot. This tag disables collision checking between a specified pair of links. -->
     <disable_collisions link1="base_link" link2="shoulder_link" reason="Adjacent"/>
     <disable_collisions link1="base_link" link2="stomach_link" reason="Adjacent"/>
