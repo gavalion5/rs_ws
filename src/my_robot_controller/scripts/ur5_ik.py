@@ -325,7 +325,7 @@ def control_speed3(joint_angles, p_goal, p_trocar,dh_params_ee,dh_params,depth_v
     global counter_path
     global path_generated
     elapsed_time = 0.01
-    n=6
+    n=4
     # start_time = time.time()
     alpha = 0.2 #low - accurate and responsive; high - smoother
     depth = depth + depth_velocity*elapsed_time
@@ -356,8 +356,8 @@ def control_speed3(joint_angles, p_goal, p_trocar,dh_params_ee,dh_params,depth_v
     error_p[:3] = p_desired - p_ee
     l1 = p_trocar - p_wrist_3 
     l2 = p_ee - p_wrist_3
-    l3 = np.dot(l1,l2)/(np.linalg.norm(l1)**2)*l1
-    rcm_error = np.linalg.norm(-l2+l3)
+    l3 = np.dot(l1,l2)/(np.linalg.norm(l2)**2)*l2
+    rcm_error = np.linalg.norm(-l1+l3)
     # cos_theta = np.dot(l1,l2)/np.linalg.norm(l1)/np.linalg.norm(l2)
     # rcm_error = (np.linalg.norm(l2)**2+np.linalg.norm(l1)**2-2*np.linalg.norm(l1)*np.linalg.norm(l2)*cos_theta)**0.5
     
@@ -385,31 +385,45 @@ def generate_path(p_ee, p_goal):
 def generate_path_steps(p_wrist_3,p_ee1, p_goal,n,p_obstacles):
     # global path_finish
     # path_generated.append(np.copy(p_ee))
+    global local_minima
     path_generated = []
     step = 0
     p_ee = np.copy(p_ee1)
     while step <n:
-        v_repulse =  vpf_repulse_link(p_wrist_3,p_ee, p_obstacles,2) #np.array([0,0,0])#vpf_repulse_link(p_wrist_3, p_ee, p_obstacles, p_trocar)
-        v_attract = vpf_attract(p_ee, p_goal)
+        v_repulse =  vpf_repulse_link(p_wrist_3,p_ee, p_obstacles,10) #np.array([0,0,0])#vpf_repulse_link(p_wrist_3, p_ee, p_obstacles, p_trocar)
+        v_repulse = np.zeros(3) #for test 1
+        v_attract = vpf_attract(p_ee, p_goal,np.linalg.norm(v_repulse))
         closest_dist = float("inf")
         closest_obs = p_ee
         for i in p_obstacles:
             temp = np.array([i[0],i[1],p_ee[2]])
             if np.linalg.norm(temp - p_ee)<closest_dist:
                 closest_obs = temp
-        v_tan = np.cross(closest_obs-p_ee, v_repulse)/np.linalg.norm(closest_obs-p_ee) * 0.1
-        v_tan = np.array([0,0,0])
+        v_tan = np.cross(np.array([0,0,1]), v_repulse) * 0.6
+        # v_tan = np.array([0,0,0])
+
         print("v attract ", v_attract )
         print("v repulse ", v_repulse )
+        print("v tan ", v_tan )
         v_desired = v_repulse+v_attract +v_tan
         print("v desired " ,np.linalg.norm(v_desired))
-        # if np.linalg.norm(v_desired) > 0.5:
-        #     v_desired = v_desired * 0.5/np.linalg.norm(v_desired)
-        if np.linalg.norm(v_desired) < 0.005:
-            v_desired = v_repulse+v_attract*3 +v_tan
-        print("distance ", np.linalg.norm(p_ee - p_goal))
-        if np.linalg.norm(p_ee - p_goal) < 0.008:
+        #speed limit
+        normal = (p_ee-p_wrist_3)/np.linalg.norm(p_ee-p_wrist_3)
+        lateral_vel = v_desired - np.dot(v_desired, normal)*normal
+        normal_vel  = np.dot(v_desired, normal)*normal
+
+        print("lateral vel: ", np.linalg.norm(lateral_vel)) 
+        lat_vel_list.append(np.linalg.norm(lateral_vel))
+        if np.linalg.norm(v_desired) > 0.5 and not np.linalg.norm(v_repulse):
+            v_desired = v_desired * 0.5/np.linalg.norm(v_desired)
+        print("distance ", np.linalg.norm(p_ee - p_goal))        
+        # if :
+            # v_desired = v_repulse+v_attract*3 +v_tan
+        if np.linalg.norm(v_desired) < 0.015: #and np.linalg.norm(p_ee - p_goal) < 0.013:
             print("flag 1")
+            v_desired = v_repulse/ np.linalg.norm(v_repulse) * np.linalg.norm(v_attract)*0.5 + v_attract*1.5 + v_tan
+        if np.linalg.norm(p_ee - p_goal) < 0.013:
+            print("flag 4")
             v_desired = v_attract
         p_ee += v_desired * 0.01
         path_generated.append(np.copy(p_ee))
@@ -419,17 +433,20 @@ def generate_path_steps(p_wrist_3,p_ee1, p_goal,n,p_obstacles):
     return path_generated
         
 
-def vpf_attract(p_ee, p_goal):
+def vpf_attract(p_ee, p_goal,is_obs_near):
     """
     :param p_ee: current 3*1 vector end-effector pose (position)
     :param p_goal: goal 3*1 vector
     """ 
-    k_att = 20
+    k_att = 25
     # if np.linalg.norm(p_ee-p_goal)<0.04:
     #     k_att = k_att* 3
-    if np.linalg.norm(p_ee - p_goal) > 0.0155:
+    if is_obs_near:
+        print("flag 3")
+        k_att = 25
+    if np.linalg.norm(p_ee - p_goal) > 0.030 or is_obs_near:
         print("flag 2")
-        return - (p_ee - p_goal)/np.linalg.norm(p_ee - p_goal) * .1
+        return - (p_ee - p_goal)/np.linalg.norm(p_ee - p_goal) * .15
     return -k_att * (p_ee - p_goal)
 
 def check_apf (p_desired, p_goal):
@@ -458,7 +475,7 @@ def vpf_repulse_link(p_wrist_3,p_ee, p_obstacles,n): #EE link vs obstacle, for 3
     :param p_obstacle: list of obstacle (3*1 vector)
     """ 
     d_thres = 0.05
-    k_rep = 0.000005
+    k_rep = 0.000003
     v_rep = np.zeros(3)
     for i in p_obstacles:
         temp = np.zeros(3)
@@ -478,7 +495,7 @@ def vpf_repulse_link(p_wrist_3,p_ee, p_obstacles,n): #EE link vs obstacle, for 3
                 # repulsion_direction = diff / (distance**3)  # Normalize and scale
 
                 # k_rep * (ee_pos - obstacle) / (dist**2 + epsilon)
-        v_rep+=temp
+        v_rep+=np.copy(temp)
                 # v_rep += repulsion_magnitude * repulsion_direction
     return v_rep
 
@@ -550,6 +567,9 @@ dh_params_with_ee = [
 
 # '''
 # apf with steps
+lat_vel_list =[]
+test_type = input("test type (1 or 2):")
+test_no= input("test_no (0-19) and (0-39):")
 delta_target = 0.013
 target_heigth = 0.08
 rcm_error_list = []
@@ -577,7 +597,13 @@ if __name__ == "__main__":
     # p_goal = np.array([0.05312177, -0.88213129,  0.09047495])
     # p_goal = np.array([0.05312177 - 0.04375 *2, -0.82213129,  0.09047495])
     # p_goal = np.array([0.04867848 + 0, -0.83445059 + 0.012, 0.07])
-    p_goal = np.array(goal_test_2_points[6])
+    if test_type == "1":
+        p_goal = np.array(goal_test_1_points[int(test_no)])
+    elif test_type == "2":
+        p_goal = np.array(goal_test_2_points[int(test_no)])
+    else:
+        print("invalid num")
+        exit()
     
     depth_velocity = 0
     depth = 0.3
@@ -633,9 +659,11 @@ start_time = time_stamp_list[0]
 for i in range(len(time_stamp_list)):
     time_stamp_list[i] = time_stamp_list[i]-start_time
 res = np.array([rcm_error_list,time_stamp_list]).T
-np.savetxt("rcm error.csv", res, delimiter=",")
+np.savetxt("rcm_error type"+ test_type +" no "+ test_no +  ".csv" , res, delimiter=",")
 print("max deviation ", max(rcm_error_list[1:]))
 print("avg deviation ", sum(rcm_error_list[1:])/(len(rcm_error_list)-1))
+print("max lat vel", max(lat_vel_list))
+print("avg lat_vel ", sum(lat_vel_list[1:])/(len(lat_vel_list)-1))
 # print(len(goal_test_1_points))
 # for i in goal_test_1_points:
 #     print(str(list(i)).replace(",","").replace("[","").replace("]",""))
