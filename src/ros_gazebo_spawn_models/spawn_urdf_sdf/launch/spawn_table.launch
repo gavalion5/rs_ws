@@ -1,0 +1,6 @@
+<launch>
+
+<param name = "description" command="$(find xacro)/xacro --inorder '$(find spawn_urdf_sdf)/models/table/table.urdf'"/>
+<node type="spawn_model" pkg="gazebo_ros" name = "spawn_urdf12" output="screen"
+      args="-urdf -file '$(find spawn_urdf_sdf)/models/table/table3.urdf' -model table2 -x 0.1"/>
+</launch>

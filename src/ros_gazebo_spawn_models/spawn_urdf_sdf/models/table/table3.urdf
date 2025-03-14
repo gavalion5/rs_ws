@@ -1,0 +1,129 @@
+<?xml version="1.0"?>
+<robot name="simple_table">
+    <!-- Table Top -->
+    <link name="table_top">
+        <visual>
+            <geometry>
+                <box size="1.0 0.5 0.05" /> <!-- Length: 1.0m, Width: 0.5m, Thickness: 0.05m -->
+            </geometry>
+            <material name="Brown">
+                <color rgba="0.5 0.3 0.1 1.0" /> <!-- Brown color -->
+            </material>
+        </visual>
+        <collision>
+            <geometry>
+                <box size="1.0 0.5 0.05" />
+            </geometry>
+        </collision>
+        <inertial>
+            <mass value="1.0" /> <!-- Table mass -->
+            <inertia ixx="0.01" iyy="0.01" izz="0.01" ixy="0.0" ixz="0.0" iyz="0.0" />
+        </inertial>
+    </link>
+
+    <!-- Table Legs -->
+    <link name="table_leg_1">
+        <visual>
+            <geometry>
+                <cylinder length="0.5" radius="0.025" /> <!-- Height: 0.5m, Radius: 0.025m -->
+            </geometry>
+            <material name="Brown">
+                <color rgba="0.5 0.3 0.1 1.0" />
+            </material>
+        </visual>
+        <collision>
+            <geometry>
+                <cylinder length="0.5" radius="0.025" />
+            </geometry>
+        </collision>
+        <inertial>
+            <mass value="0.1" />
+            <inertia ixx="0.001" iyy="0.001" izz="0.001" ixy="0.0" ixz="0.0" iyz="0.0" />
+        </inertial>
+    </link>
+
+    <link name="table_leg_2">
+        <visual>
+            <geometry>
+                <cylinder length="0.5" radius="0.025" />
+            </geometry>
+            <material name="Brown">
+                <color rgba="0.5 0.3 0.1 1.0" />
+            </material>
+        </visual>
+        <collision>
+            <geometry>
+                <cylinder length="0.5" radius="0.025" />
+            </geometry>
+        </collision>
+        <inertial>
+            <mass value="0.1" />
+            <inertia ixx="0.001" iyy="0.001" izz="0.001" ixy="0.0" ixz="0.0" iyz="0.0" />
+        </inertial>
+    </link>
+
+    <link name="table_leg_3">
+        <visual>
+            <geometry>
+                <cylinder length="0.5" radius="0.025" />
+            </geometry>
+            <material name="Brown">
+                <color rgba="0.5 0.3 0.1 1.0" />
+            </material>
+        </visual>
+        <collision>
+            <geometry>
+                <cylinder length="0.5" radius="0.025" />
+            </geometry>
+        </collision>
+        <inertial>
+            <mass value="0.1" />
+            <inertia ixx="0.001" iyy="0.001" izz="0.001" ixy="0.0" ixz="0.0" iyz="0.0" />
+        </inertial>
+    </link>
+
+    <link name="table_leg_4">
+        <visual>
+            <geometry>
+                <cylinder length="0.5" radius="0.025" />
+            </geometry>
+            <material name="Brown">
+                <color rgba="0.5 0.3 0.1 1.0" />
+            </material>
+        </visual>
+        <collision>
+            <geometry>
+                <cylinder length="0.5" radius="0.025" />
+            </geometry>
+        </collision>
+        <inertial>
+            <mass value="0.1" />
+            <inertia ixx="0.001" iyy="0.001" izz="0.001" ixy="0.0" ixz="0.0" iyz="0.0" />
+        </inertial>
+    </link>
+
+    <!-- Joints to connect legs to the table top -->
+    <joint name="joint_leg_1" type="fixed">
+        <parent link="table_top" />
+        <child link="table_leg_1" />
+        <origin xyz="-0.4 -0.2 -0.275" rpy="0 0 0" />
+    </joint>
+
+    <joint name="joint_leg_2" type="fixed">
+        <parent link="table_top" />
+        <child link="table_leg_2" />
+        <origin xyz="0.4 -0.2 -0.275" rpy="0 0 0" />
+    </joint>
+
+    <joint name="joint_leg_3" type="fixed">
+        <parent link="table_top" />
+        <child link="table_leg_3" />
+        <origin xyz="-0.4 0.2 -0.275" rpy="0 0 0" />
+    </joint>
+
+    <joint name="joint_leg_4" type="fixed">
+        <parent link="table_top" />
+        <child link="table_leg_4" />
+        <origin xyz="0.4 0.2 -0.275" rpy="0 0 0" />
+    </joint>
+</robot>
